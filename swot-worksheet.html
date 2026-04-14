@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>تحليل SWOT الشخصي - ورقة عمل</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          "Segoe UI",
+          -apple-system,
+          sans-serif;
+        color: #1b2a4a;
+        background: white;
+        padding: 24px;
+        max-width: 800px;
+        margin: 0 auto;
+        direction: rtl;
+        text-align: right;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 16px;
+        border-bottom: 3px solid #1b2a4a;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1b2a4a;
+      }
+      .header .session-tag {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: white;
+        background: #1b2a4a;
+        padding: 6px 14px;
+        border-radius: 4px;
+      }
+
+      /* Student Info */
+      .student-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .student-info .field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .student-info .field span {
+        color: #6c757d;
+        white-space: nowrap;
+      }
+      .student-info .field .line {
+        flex: 1;
+        border-bottom: 1px solid #dee2e6;
+        min-width: 80px;
+      }
+      .student-info .field input {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #dee2e6;
+        background: transparent;
+        font-family: inherit;
+        font-size: inherit;
+        outline: none;
+        padding: 2px 4px;
+      }
+      .student-info .field input:focus {
+        background: #fffef0;
+        border-bottom-color: #00b4d8;
+      }
+
+      /* Instruction */
+      .instruction {
+        background: #f0f7ff;
+        border-left: 3px solid #00b4d8;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #343a40;
+      }
+
+      /* SWOT Grid */
+      .swot-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+      .swot-box {
+        border: 1.5px solid #dee2e6;
+        border-radius: 8px;
+        overflow: hidden;
+        min-height: 200px;
+      }
+      .swot-box .box-header {
+        padding: 8px 16px;
+        color: white;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: center;
+      }
+      .swot-box .box-sub {
+        padding: 4px 16px 6px;
+        font-size: 11px;
+        color: #6c757d;
+        text-align: center;
+        background: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+      }
+      .swot-box .box-body {
+        padding: 12px 16px;
+      }
+      .swot-box .write-line {
+        border-bottom: 1px dotted #ccc;
+        min-height: 28px;
+        margin-bottom: 2px;
+        padding: 4px 0;
+      }
+      .editable-input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: inherit;
+        color: inherit;
+        outline: none;
+        padding: 2px 0;
+      }
+      .editable-input:focus {
+        background: #fffef0;
+      }
+
+      .s-header {
+        background: #2ec4b6;
+      }
+      .w-header {
+        background: #e63946;
+      }
+      .o-header {
+        background: #00b4d8;
+      }
+      .t-header {
+        background: #f4a623;
+      }
+
+      /* Reflection */
+      .reflection {
+        border: 1.5px solid #dee2e6;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+      .reflection h3 {
+        font-size: 14px;
+        font-weight: 700;
+        color: #1b2a4a;
+        margin-bottom: 12px;
+      }
+      .reflection .q {
+        font-size: 12.5px;
+        color: #343a40;
+        margin-bottom: 4px;
+        font-weight: 500;
+      }
+      .reflection .answer-lines {
+        margin-bottom: 12px;
+      }
+      .reflection .answer-line {
+        border-bottom: 1px dotted #ccc;
+        height: 24px;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        font-size: 11px;
+        color: #adb5bd;
+        padding-top: 12px;
+        border-top: 1px solid #dee2e6;
+      }
+
+      @media print {
+        body {
+          padding: 0;
+        }
+        .swot-box {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>تحليل SWOT الشخصي</h1>
+      <span class="session-tag">الجلسة 01</span>
+    </div>
+
+    <div class="student-info">
+      <div class="field">
+        <span>الاسم:</span>
+        <input type="text" id="studentName" placeholder="اكتب اسمك هنا">
+      </div>
+      <div class="field">
+        <span>التخصص:</span>
+        <input type="text" id="studentTrack" placeholder="مثال: تطوير برمجيات">
+      </div>
+      <div class="field">
+        <span>التاريخ:</span>
+        <input type="text" id="studentDate" placeholder="التاريخ">
+      </div>
+      <div class="field">
+        <span>المجموعة:</span>
+        <input type="text" id="studentGroup" placeholder="المجموعة">
+      </div>
+    </div>
+
+    <div class="instruction">
+      <strong>التعليمات:</strong> فكر بصدق عن نفسك كمحترف. اكتب على الأقل 3 عناصر في كل جزء. ركز على ما هو حقيقي ومحدد، وليس على ما يبدو جيداً. لا توجد إجابات صحيحة أو خاطئة. ورقة العمل هذه لك أنت.
+    </div>
+
+    <div class="swot-grid">
+      <div class="swot-box">
+        <div class="box-header s-header">نقاط القوة - Strengths</div>
+        <div class="box-sub">إيجابيات داخلية - ما الذي أجيده؟</div>
+        <div class="box-body">
+          <div class="write-line"><input type="text" class="editable-input" data-field="strength-1" placeholder="مثال: مهارات تقنية قوية بالبرمجة"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="strength-2" placeholder="مثال: شغف بالتعلم المستمر"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="strength-3" placeholder="مثال: مهارات تواصل جيدة"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="strength-4"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="strength-5"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="strength-6"></div>
+        </div>
+      </div>
+
+      <div class="swot-box">
+        <div class="box-header w-header">نقاط الضعف - Weaknesses</div>
+        <div class="box-sub">
+          سلبيات داخلية - ما الذي أحتاج لتحسينه؟
+        </div>
+        <div class="box-body">
+          <div class="write-line"><input type="text" class="editable-input" data-field="weakness-1" placeholder="مثال: خبرة عملية محدودة"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="weakness-2" placeholder="مثال: قلق من التحدث أمام الجمهور"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="weakness-3" placeholder="مثال: إدارة الوقت"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="weakness-4"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="weakness-5"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="weakness-6"></div>
+        </div>
+      </div>
+
+      <div class="swot-box">
+        <div class="box-header o-header">الفرص - Opportunities</div>
+        <div class="box-sub">
+          إيجابيات خارجية - ما الأبواب المفتوحة أمامي؟
+        </div>
+        <div class="box-body">
+          <div class="write-line"><input type="text" class="editable-input" data-field="opportunity-1" placeholder="مثال: طلب متزايد على مجالي"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="opportunity-2" placeholder="مثال: فرص العمل عن بعد"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="opportunity-3" placeholder="مثال: برامج الإرشاد والتدريب"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="opportunity-4"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="opportunity-5"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="opportunity-6"></div>
+        </div>
+      </div>
+
+      <div class="swot-box">
+        <div class="box-header t-header">التهديدات - Threats</div>
+        <div class="box-sub">
+          سلبيات خارجية - ما التحديات التي أواجهها؟
+        </div>
+        <div class="box-body">
+          <div class="write-line"><input type="text" class="editable-input" data-field="threat-1" placeholder="مثال: سوق عمل تنافسي"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="threat-2" placeholder="مثال: تغيرات تكنولوجية سريعة"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="threat-3" placeholder="مثال: عدم وجود شبكة علاقات"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="threat-4"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="threat-5"></div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="threat-6"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reflection">
+      <h3>أسئلة التفكير</h3>
+
+      <div class="q">
+        1. أي نقطة قوة يمكنك استخدامها الآن للاستفادة من فرصة؟
+      </div>
+      <div class="answer-lines">
+        <div class="answer-line"><input type="text" class="editable-input" data-field="reflection-1" placeholder="اكتب إجابتك هنا..."></div>
+        <div class="answer-line"><input type="text" class="editable-input" data-field="reflection-1b"></div>
+      </div>
+
+      <div class="q">
+        2. أي نقطة ضعف، إذا تم تحسينها، سيكون لها أكبر تأثير على مسيرتك المهنية؟
+      </div>
+      <div class="answer-lines">
+        <div class="answer-line"><input type="text" class="editable-input" data-field="reflection-2" placeholder="اكتب إجابتك هنا..."></div>
+        <div class="answer-line"><input type="text" class="editable-input" data-field="reflection-2b"></div>
+      </div>
+
+      <div class="q">
+        3. ما هو إجراء واحد محدد يمكنك اتخاذه هذا الأسبوع بناءً على تحليل SWOT الخاص بك؟
+      </div>
+      <div class="answer-lines">
+        <div class="answer-line"><input type="text" class="editable-input" data-field="reflection-3" placeholder="اكتب إجابتك هنا..."></div>
+        <div class="answer-line"><input type="text" class="editable-input" data-field="reflection-3b"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      منهج مهارات التوظيف &middot; برنامج الخريجين الجدد &middot;
+      الجلسة 01: الوعي الذاتي والعلامة الشخصية
+      <button onclick="saveData()" style="margin-right: 20px; padding: 6px 16px; background: #00b4d8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">💾 حفظ العمل</button>
+      <button onclick="downloadPDF()" style="margin-right: 8px; padding: 6px 16px; background: #2ec4b6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">📥 تحميل PDF</button>
+    </div>
+
+    <script>
+      // Load saved data on page load
+      window.addEventListener('DOMContentLoaded', function() {
+        loadData();
+      });
+
+      // Auto-save on input change
+      document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('editable-input') || e.target.id.startsWith('student')) {
+          autoSave();
+        }
+      });
+
+      function autoSave() {
+        const data = {};
+        
+        // Save student info
+        data.studentName = document.getElementById('studentName').value;
+        data.studentTrack = document.getElementById('studentTrack').value;
+        data.studentDate = document.getElementById('studentDate').value;
+        data.studentGroup = document.getElementById('studentGroup').value;
+        
+        // Save all editable inputs
+        document.querySelectorAll('.editable-input').forEach(input => {
+          const field = input.getAttribute('data-field');
+          data[field] = input.value;
+        });
+        
+        localStorage.setItem('swot_worksheet_data', JSON.stringify(data));
+      }
+
+      function saveData() {
+        autoSave();
+        alert('✅ تم حفظ عملك بنجاح!');
+      }
+
+      function loadData() {
+        const saved = localStorage.getItem('swot_worksheet_data');
+        if (saved) {
+          const data = JSON.parse(saved);
+          
+          // Load student info
+          if (data.studentName) document.getElementById('studentName').value = data.studentName;
+          if (data.studentTrack) document.getElementById('studentTrack').value = data.studentTrack;
+          if (data.studentDate) document.getElementById('studentDate').value = data.studentDate;
+          if (data.studentGroup) document.getElementById('studentGroup').value = data.studentGroup;
+          
+          // Load all editable inputs
+          document.querySelectorAll('.editable-input').forEach(input => {
+            const field = input.getAttribute('data-field');
+            if (data[field]) {
+              input.value = data[field];
+            }
+          });
+        }
+      }
+
+      function downloadPDF() {
+        window.print();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مصادر إضافية - الجلسة 01</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 15px;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #00b4d8;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        
+        .content {
+            padding: 25px;
+        }
+        
+        .intro-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-right: 4px solid #f4a623;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        
+        .intro-box h2 {
+            color: #e8871e;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .intro-box p {
+            line-height: 1.6;
+            color: #5d4037;
+            font-size: 0.95em;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #1e3c72;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #00b4d8;
+        }
+        
+        .section-subtitle {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-top: 30%; /* أصغر */
+            background: #000;
+            overflow: hidden;
+        }
+        
+        .video-thumbnail a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-info {
+            padding: 15px;
+        }
+        
+        .video-title {
+            font-size: 1.05em;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .video-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8em;
+            color: #666;
+        }
+        
+        .video-description {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        
+        .video-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+        
+        .tag.arabic {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .tag.english {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        
+        .tag.audio {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .watch-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 3px 12px rgba(0,180,216,0.3);
+            font-size: 0.9em;
+        }
+        
+        .watch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,180,216,0.4);
+        }
+        
+        .tips-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .tips-box h3 {
+            color: #1565c0;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .tips-list {
+            list-style: none;
+        }
+        
+        .tips-list li {
+            padding: 8px 0;
+            padding-right: 25px;
+            position: relative;
+            line-height: 1.5;
+            color: #1565c0;
+            font-size: 0.9em;
+        }
+        
+        .tips-list li::before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .footer p {
+            margin: 3px 0;
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>مصادر تعليمية إضافية</h1>
+            <p>الجلسة 01: الوعي الذاتي والعلامة الشخصية</p>
+            <span class="badge">اختياري - للتعمق أكثر</span>
+        </div>
+        
+        <div class="content">
+            <div class="intro-box">
+                <h2>الهدف من هذه المصادر</h2>
+                <p>
+                    هذه الفيديوهات اختيارية - مش إجبارية! الهدف إنك تتعمق أكثر بالموضوع وتشوف أمثلة عملية من خبراء مختلفين.
+                    شوف اللي بيهمك وعندك وقت إله. كل فيديو فيه قيمة كبيرة!
+                </p>
+            </div>
+            
+            <!-- SWOT Analysis Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    تحليل SWOT الشخصي
+                </h2>
+                <p class="section-subtitle">شرح عملي مع أمثلة واقعية</p>
+                
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <a href="https://www.youtube.com/watch?v=YzHy3SrpAGU" target="_blank">
+                                <img src="https://img.youtube.com/vi/YzHy3SrpAGU/hqdefault.jpg" alt="SWOT Analysis">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 68px; height: 48px; background: rgba(255,0,0,0.8); border-radius: 12px; cursor: pointer;">
+                                    <div style="width: 0; height: 0; border-style: solid; border-width: 12px 0 12px 20px; border-color: transparent transparent transparent white; margin: 12px 0 0 24px;"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Personal SWOT Analysis - شرح مفصل</h3>
+                            <div class="video-meta">
+                                <span class="meta-item">حوالي 10 دقائق</span>
+                                <span class="meta-item">فيديو</span>
+                            </div>
+                            <p class="video-description">
+                                شرح عملي ومفصل لكيفية عمل تحليل SWOT شخصي. الفيديو بيغطي كل جزء بالتفصيل مع أمثلة واقعية.
+                                متى تشوفه: بعد ما تعبي ورقة SWOT تبعتك - هيك رح تقارن وتتأكد إنك ماشي صح.
+                            </p>
+                            <div class="video-tags">
+                                <span class="tag english">English</span>
+                                <span class="tag">SWOT</span>
+                                <span class="tag">عملي</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=YzHy3SrpAGU" target="_blank" class="watch-btn">
+                                شاهد على YouTube
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Personal Branding Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    بناء العلامة الشخصية
+                </h2>
+                <p class="section-subtitle">كيف تبني حضور قوي ومحترف</p>
+                
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <a href="https://www.youtube.com/watch?v=ozMCb0wOnMU" target="_blank">
+                                <img src="https://img.youtube.com/vi/ozMCb0wOnMU/hqdefault.jpg" alt="Personal Branding">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 68px; height: 48px; background: rgba(255,0,0,0.8); border-radius: 12px; cursor: pointer;">
+                                    <div style="width: 0; height: 0; border-style: solid; border-width: 12px 0 12px 20px; border-color: transparent transparent transparent white; margin: 12px 0 0 24px;"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Personal Branding - دليل شامل</h3>
+                            <div class="video-meta">
+                                <span class="meta-item">حوالي 15 دقيقة</span>
+                                <span class="meta-item">فيديو</span>
+                            </div>
+                            <p class="video-description">
+                                دليل شامل لبناء علامتك الشخصية من الصفر. بيغطي: كيف تحدد هويتك، كيف تبني حضور رقمي، وكيف تميز نفسك عن الآخرين.
+                                متى تشوفه: بعد ما تكتب بيانك الشخصي - رح يعطيك أفكار إضافية.
+                            </p>
+                            <div class="video-tags">
+                                <span class="tag english">English</span>
+                                <span class="tag">Personal Brand</span>
+                                <span class="tag">LinkedIn</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=ozMCb0wOnMU" target="_blank" class="watch-btn">
+                                شاهد على YouTube
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Self-Awareness Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    الوعي الذاتي
+                </h2>
+                <p class="section-subtitle">فهم أعمق لنفسك ودوافعك</p>
+                
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <a href="https://www.youtube.com/watch?v=YuhaTp5GskI" target="_blank">
+                                <img src="https://img.youtube.com/vi/YuhaTp5GskI/hqdefault.jpg" alt="Self-Awareness">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 68px; height: 48px; background: rgba(255,0,0,0.8); border-radius: 12px; cursor: pointer;">
+                                    <div style="width: 0; height: 0; border-style: solid; border-width: 12px 0 12px 20px; border-color: transparent transparent transparent white; margin: 12px 0 0 24px;"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Self-Awareness - محاضرة صوتية</h3>
+                            <div class="video-meta">
+                                <span class="meta-item">مدة متغيرة</span>
+                                <span class="meta-item">صوت فقط</span>
+                            </div>
+                            <p class="video-description">
+                                محاضرة صوتية عميقة عن الوعي الذاتي وأهميته في النجاح المهني والشخصي. 
+                                مثالي للاستماع أثناء التنقل أو ممارسة الرياضة.
+                                متى تسمعه: في أي وقت - ممكن تسمعه وأنت بالطريق أو بالبيت.
+                            </p>
+                            <div class="video-tags">
+                                <span class="tag english">English</span>
+                                <span class="tag audio">Audio Only</span>
+                                <span class="tag">Self-Awareness</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=YuhaTp5GskI" target="_blank" class="watch-btn">
+                                استمع على YouTube
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tips Section -->
+            <div class="tips-box">
+                <h3>نصائح للاستفادة القصوى</h3>
+                <ul class="tips-list">
+                    <li>لا تشوف كل الفيديوهات مرة وحدة - اختار واحد أو اثنين بس</li>
+                    <li>شوف الفيديو بتركيز - خذ ملاحظات على النقاط المهمة</li>
+                    <li>طبق اللي تعلمته - المعرفة بدون تطبيق يساوي صفر</li>
+                    <li>شارك مع زملاءك - ناقش اللي تعلمته معهم</li>
+                    <li>ارجع للفيديوهات بعد فترة - كل مرة رح تلاحظ أشياء جديدة</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Employability Skills Training</p>
+            <p>Session 01: Self-Awareness & Personal Branding</p>
+  
+        </div>
+    </div>
+</body>
+</html>
