@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>نشاط الإيميل المهني - الجلسة 02</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 20mm;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #1b2a4a;
+        line-height: 1.5;
+        padding: 32px;
+        max-width: 800px;
+        margin: 0 auto;
+        direction: rtl;
+        text-align: right;
+      }
+
+      /* Header */
+      .ws-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-bottom: 16px;
+        border-bottom: 3px solid #00b4d8;
+        margin-bottom: 24px;
+      }
+      .ws-header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1b2a4a;
+      }
+      .ws-header .ws-meta {
+        text-align: left;
+        font-size: 12px;
+        color: #6c757d;
+      }
+      .ws-header .ws-meta strong {
+        color: #00b4d8;
+      }
+
+      /* Name field */
+      .name-field {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .name-field .field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .name-field .field span {
+        color: #6c757d;
+        white-space: nowrap;
+      }
+      .name-field .field input {
+        flex: 1;
+        border: none;
+        border-bottom: 1.5px solid #dee2e6;
+        background: transparent;
+        font-family: inherit;
+        font-size: inherit;
+        outline: none;
+        padding: 2px 4px;
+      }
+      .name-field .field input:focus {
+        background: #fffef0;
+        border-bottom-color: #00b4d8;
+      }
+
+      /* Section */
+      .section {
+        margin-bottom: 28px;
+      }
+      .section-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #00b4d8;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid #e9ecef;
+      }
+      .section p {
+        font-size: 13.5px;
+        color: #343a40;
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      /* Example box */
+      .example-box {
+        background: #f8f9fa;
+        border-right: 3px solid #f4a623;
+        border-radius: 6px 0 0 6px;
+        padding: 14px 18px;
+        margin-bottom: 16px;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .example-box .ex-label {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #f4a623;
+        margin-bottom: 6px;
+      }
+      .example-box strong {
+        color: #1b2a4a;
+      }
+
+      /* Writing area */
+      .write-area {
+        border: 1.5px solid #dee2e6;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 8px;
+      }
+      .write-area .field-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 0;
+        border-bottom: 1px dotted #dee2e6;
+        font-size: 13px;
+      }
+      .write-area .field-row:last-of-type {
+        border-bottom: none;
+        margin-bottom: 12px;
+      }
+      .write-area .field-label {
+        font-weight: 700;
+        color: #1b2a4a;
+        min-width: 60px;
+        font-size: 12px;
+      }
+      .write-area .field-input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: inherit;
+        outline: none;
+        padding: 2px 0;
+      }
+      .write-area .field-input:focus {
+        background: #fffef0;
+      }
+      .write-area .body-area {
+        min-height: 280px;
+        border-top: 1px dotted #dee2e6;
+        padding-top: 12px;
+      }
+      .write-area .body-area textarea {
+        width: 100%;
+        min-height: 260px;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 13px;
+        line-height: 1.6;
+        resize: vertical;
+        outline: none;
+        padding: 4px 0;
+      }
+      .write-area .body-area textarea:focus {
+        background: #fffef0;
+      }
+
+      /* Checklist */
+      .checklist {
+        list-style: none;
+        margin-top: 12px;
+      }
+      .checklist li {
+        font-size: 13px;
+        padding: 5px 28px 5px 0;
+        position: relative;
+        color: #343a40;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .checklist li:hover {
+        color: #00b4d8;
+      }
+      .checklist li input[type="checkbox"] {
+        position: absolute;
+        right: 0;
+        top: 7px;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        accent-color: #00b4d8;
+      }
+      .checklist li.checked {
+        color: #6c757d;
+        text-decoration: line-through;
+      }
+
+      /* Tips box */
+      .tips-box {
+        background: #e8f8f5;
+        border-radius: 8px;
+        padding: 16px 20px;
+        margin-top: 16px;
+      }
+      .tips-box h3 {
+        font-size: 13px;
+        font-weight: 700;
+        color: #2ec4b6;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+      .tips-box ul {
+        list-style: none;
+        font-size: 12.5px;
+        color: #343a40;
+      }
+      .tips-box ul li {
+        padding: 3px 16px 3px 0;
+        position: relative;
+      }
+      .tips-box ul li::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 10px;
+        width: 6px;
+        height: 6px;
+        background: #2ec4b6;
+        border-radius: 50%;
+      }
+
+      /* Footer */
+      .ws-footer {
+        margin-top: 20px;
+        padding-top: 12px;
+        border-top: 1px solid #e9ecef;
+        font-size: 11px;
+        color: #adb5bd;
+        text-align: center;
+      }
+
+      @media print {
+        body {
+          padding: 0;
+        }
+        .write-area {
+          min-height: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ws-header">
+      <div>
+        <h1>نشاط الإيميل المهني</h1>
+      </div>
+      <div class="ws-meta">
+        <strong>الجلسة 02</strong><br />
+        مهارات التواصل المهني<br />
+        منهج مهارات التوظيف
+      </div>
+    </div>
+
+    <div class="name-field">
+      <div class="field">
+        <span>الاسم:</span>
+        <input type="text" id="studentName" placeholder="اكتب اسمك هنا">
+      </div>
+      <div class="field">
+        <span>التخصص:</span>
+        <input type="text" id="studentTrack" placeholder="مثال: تطوير برمجيات">
+      </div>
+    </div>
+
+    <!-- Part 1: Reference -->
+    <div class="section">
+      <div class="section-title">الجزء الأول: هيكل الإيميل المهني</div>
+      <p>
+        الإيميل المهني يتبع هيكل واضح. استخدم هذا كدليل عند كتابة إيميلات بالإنجليزية لأصحاب العمل أو العملاء أو الزملاء.
+      </p>
+      <div class="example-box">
+        <div class="ex-label">القالب</div>
+        <div style="direction: ltr; text-align: left;">
+        <strong>Subject:</strong> Application for Junior Developer Position<br /><br />
+        Dear Mr./Ms. [Last Name],<br /><br />
+        I am writing to express my interest in the [Job Title] position advertised on LinkedIn.<br /><br />
+        I am a recent graduate in [Your Major] with experience in [Key Skills]. I believe my skills align well with the requirements of this role.<br /><br />
+        I have attached my CV for your review. I look forward to discussing how I can contribute to your team.<br /><br />
+        Best regards,<br />
+        [Your Full Name]
+        </div>
+      </div>
+    </div>
+
+    <!-- Part 2: Your Email -->
+    <div class="section">
+      <div class="section-title">الجزء الثاني: اكتب إيميلك المهني</div>
+      <p>
+        <strong>السيناريو:</strong> وجدت إعلان وظيفة على LinkedIn لوظيفة في مجال تخصصك. اكتب إيميل مهني بالإنجليزية لمدير التوظيف تعبر فيه عن اهتمامك وترفق سيرتك الذاتية.
+      </p>
+      <div class="write-area">
+        <div class="field-row">
+          <span class="field-label">To:</span>
+          <input type="text" class="field-input" id="emailTo" dir="ltr" style="text-align: left;" placeholder="hr@company.com">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Subject:</span>
+          <input type="text" class="field-input" id="emailSubject" dir="ltr" style="text-align: left;" placeholder="Application for [Job Title]">
+        </div>
+        <div class="body-area">
+          <textarea id="emailBody" dir="ltr" style="text-align: left;" placeholder="Write your professional email here in English..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part 3: Peer Review -->
+    <div class="section">
+      <div class="section-title">الجزء الثالث: قائمة المراجعة الذاتية</div>
+      <p>
+        راجع إيميلك بنفسك باستخدام هذه القائمة:
+      </p>
+      <ul class="checklist">
+        <li><input type="checkbox" onclick="toggleCheck(this)"> الموضوع محدد ومهني (ليس "مرحبا" أو "سؤال")</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> التحية تستخدم اللقب والاسم الصحيح (Dear Mr./Ms.)</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> الهدف مذكور في الجملة الأولى</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> المحتوى مختصر (أقل من 5 جمل)</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> الختام يتضمن خطوة تالية واضحة</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> التوقيع مهني (Kind regards / Best regards)</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> لا توجد أخطاء إملائية أو نحوية</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> لا توجد لغة عامية أو اختصارات غير رسمية</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> النبرة واثقة لكن مهذبة</li>
+      </ul>
+    </div>
+
+    <!-- Tips -->
+    <div class="tips-box">
+      <h3>نصائح سريعة</h3>
+      <ul>
+        <li>اقرأ إيميلك بصوت عالٍ قبل الإرسال - إذا بدا غريباً، أعد كتابته</li>
+        <li>الموضوع الجيد مثل العنوان: محدد، واضح، وأقل من 10 كلمات</li>
+        <li>إيميل واحد = هدف واحد. لا تخلط المواضيع</li>
+        <li>راجع دائماً. الأخطاء الإملائية تخبر صاحب العمل أنك لا تهتم بالتفاصيل</li>
+        <li>عند الشك، كن أكثر رسمية. يمكنك دائماً التخفيف لاحقاً</li>
+      </ul>
+    </div>
+
+    <div class="ws-footer">
+      منهج مهارات التوظيف - برنامج الخريجين الجدد - الجلسة 02: مهارات التواصل المهني
+      <br>
+      <button onclick="saveData()" style="margin-top: 12px; padding: 6px 16px; background: #00b4d8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">💾 حفظ العمل</button>
+      <button onclick="downloadPDF()" style="margin-right: 8px; padding: 6px 16px; background: #2ec4b6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">📥 تحميل PDF</button>
+    </div>
+
+    <script>
+      // Load saved data on page load
+      window.addEventListener('DOMContentLoaded', function() {
+        loadData();
+      });
+
+      // Auto-save on input change
+      document.addEventListener('input', function(e) {
+        if (e.target.id || e.target.classList.contains('field-input')) {
+          autoSave();
+        }
+      });
+
+      function autoSave() {
+        const data = {};
+        
+        // Save student info
+        data.studentName = document.getElementById('studentName').value;
+        data.studentTrack = document.getElementById('studentTrack').value;
+        
+        // Save email fields
+        data.emailTo = document.getElementById('emailTo').value;
+        data.emailSubject = document.getElementById('emailSubject').value;
+        data.emailBody = document.getElementById('emailBody').value;
+        
+        localStorage.setItem('email_worksheet_data', JSON.stringify(data));
+      }
+
+      function saveData() {
+        autoSave();
+        alert('✅ تم حفظ عملك بنجاح!');
+      }
+
+      function loadData() {
+        const saved = localStorage.getItem('email_worksheet_data');
+        if (saved) {
+          const data = JSON.parse(saved);
+          
+          // Load student info
+          if (data.studentName) document.getElementById('studentName').value = data.studentName;
+          if (data.studentTrack) document.getElementById('studentTrack').value = data.studentTrack;
+          
+          // Load email fields
+          if (data.emailTo) document.getElementById('emailTo').value = data.emailTo;
+          if (data.emailSubject) document.getElementById('emailSubject').value = data.emailSubject;
+          if (data.emailBody) document.getElementById('emailBody').value = data.emailBody;
+        }
+      }
+
+      function downloadPDF() {
+        window.print();
+      }
+
+      function toggleCheck(checkbox) {
+        const li = checkbox.parentElement;
+        if (checkbox.checked) {
+          li.classList.add('checked');
+        } else {
+          li.classList.remove('checked');
+        }
+      }
+    </script>
+  </body>
+</html>
