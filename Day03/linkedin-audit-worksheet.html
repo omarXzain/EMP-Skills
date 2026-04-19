@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>تدقيق حساب LinkedIn - ورقة عمل</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          "Segoe UI",
+          -apple-system,
+          sans-serif;
+        color: #1b2a4a;
+        background: white;
+        padding: 24px;
+        max-width: 800px;
+        margin: 0 auto;
+        direction: rtl;
+        text-align: right;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 16px;
+        border-bottom: 3px solid #1b2a4a;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1b2a4a;
+      }
+      .header .session-tag {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: white;
+        background: #1b2a4a;
+        padding: 6px 14px;
+        border-radius: 4px;
+      }
+
+      /* Student Info */
+      .student-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .student-info .field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .student-info .field span {
+        color: #6c757d;
+        white-space: nowrap;
+      }
+      .student-info .field input {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #dee2e6;
+        background: transparent;
+        font-family: inherit;
+        font-size: inherit;
+        outline: none;
+        padding: 2px 4px;
+      }
+      .student-info .field input:focus {
+        background: #fffef0;
+        border-bottom-color: #00b4d8;
+      }
+
+      /* Instructions */
+      .instructions {
+        background: #f0f7ff;
+        border-right: 3px solid #6366f1;
+        border-radius: 8px 0 0 8px;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #343a40;
+      }
+      .instructions strong {
+        color: #1b2a4a;
+      }
+
+      /* Stat Banner */
+      .stat-banner {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        background: #1b2a4a;
+        color: white;
+        padding: 14px 20px;
+        border-radius: 8px;
+        margin-bottom: 24px;
+      }
+      .stat {
+        text-align: center;
+      }
+      .stat .number {
+        font-size: 28px;
+        font-weight: 800;
+        color: #00b4d8;
+      }
+      .stat .label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 2px;
+      }
+
+      /* Audit Section */
+      .audit-section {
+        margin-bottom: 22px;
+      }
+      .audit-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1b2a4a;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #6366f1;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .audit-icon {
+        font-size: 16px;
+      }
+
+      /* Rating Row */
+      .rating-row {
+        display: grid;
+        grid-template-columns: 1fr 120px;
+        gap: 12px;
+        padding: 6px 0;
+        font-size: 13px;
+        line-height: 1.5;
+        color: #343a40;
+        border-bottom: 1px solid #f1f3f5;
+      }
+      .rating-row:last-child {
+        border-bottom: none;
+      }
+      .rating-circles {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      .rating-circles input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: #6366f1;
+      }
+      .rating-label {
+        font-size: 9px;
+        color: #adb5bd;
+        font-weight: 600;
+      }
+
+      /* Write Lines */
+      .write-area {
+        margin-top: 12px;
+      }
+      .write-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #6c757d;
+        margin-bottom: 6px;
+      }
+      .write-line {
+        border-bottom: 1px dotted #ccc;
+        min-height: 28px;
+        margin-bottom: 2px;
+        padding: 4px 0;
+      }
+      .editable-input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 13px;
+        color: inherit;
+        outline: none;
+        padding: 2px 0;
+      }
+      .editable-input:focus {
+        background: #fffef0;
+      }
+      textarea.editable-input {
+        resize: vertical;
+        min-height: 60px;
+        line-height: 1.5;
+      }
+
+      /* Peer Review */
+      .peer-box {
+        background: #fef9f0;
+        border: 1.5px solid #f4a623;
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 24px;
+      }
+      .peer-box h3 {
+        font-size: 14px;
+        font-weight: 700;
+        color: #f4a623;
+        margin-bottom: 10px;
+      }
+
+      /* Footer */
+      .footer {
+        margin-top: 24px;
+        padding-top: 12px;
+        border-top: 1px solid #dee2e6;
+        font-size: 11px;
+        color: #6c757d;
+        text-align: center;
+      }
+
+      @media print {
+        body {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>تدقيق حساب LinkedIn</h1>
+      <div class="session-tag">الجلسة 03</div>
+    </div>
+
+    <div class="student-info">
+      <div class="field"><span>الاسم:</span><input type="text" id="studentName" placeholder="اكتب اسمك هنا"></div>
+      <div class="field"><span>التخصص:</span><input type="text" id="studentTrack" placeholder="مثال: تطوير برمجيات"></div>
+    </div>
+
+    <div class="instructions">
+      <strong>التعليمات:</strong> قيّم كل عنصر من عناصر حسابك على LinkedIn من 1 (ضعيف) إلى 5 (ممتاز). كن صادقاً - هذا التدقيق يساعدك على تحديد ما يجب تحسينه. ثم تبادل مع زميل للحصول على ملاحظات.
+      <br><br>
+      <strong>ملاحظة:</strong> إذا لم يكن لديك حساب LinkedIn بعد، أنشئ واحد الآن على: <a href="https://www.linkedin.com/signup" target="_blank" style="color: #0077b5; font-weight: 600; text-decoration: none;">linkedin.com/signup</a>
+    </div>
+
+    <div class="stat-banner">
+      <div class="stat">
+        <div class="number">40×</div>
+        <div class="label">مشاهدات أكثر<br>مع حساب مكتمل</div>
+      </div>
+      <div class="stat">
+        <div class="number">87%</div>
+        <div class="label">من مسؤولي التوظيف<br>يستخدمون LinkedIn</div>
+      </div>
+      <div class="stat">
+        <div class="number">500+</div>
+        <div class="label">اتصالات تزيد<br>فرصك 3 أضعاف</div>
+      </div>
+    </div>
+
+    <!-- Profile Photo -->
+    <div class="audit-section">
+      <div class="audit-title">
+        <span class="audit-icon">📷</span> صورة الملف الشخصي - Profile Photo
+      </div>
+      <div class="rating-row">
+        <span>صورة شخصية احترافية (وجه واضح، إضاءة جيدة)</span>
+        <div class="rating-circles">
+          <input type="radio" name="photo-1" value="1" data-field="photo-1">
+          <input type="radio" name="photo-1" value="2" data-field="photo-1">
+          <input type="radio" name="photo-1" value="3" data-field="photo-1">
+          <input type="radio" name="photo-1" value="4" data-field="photo-1">
+          <input type="radio" name="photo-1" value="5" data-field="photo-1">
+        </div>
+      </div>
+      <div class="rating-row">
+        <span>خلفية بسيطة/نظيفة (ليست عادية أو مزدحمة)</span>
+        <div class="rating-circles">
+          <input type="radio" name="photo-2" value="1" data-field="photo-2">
+          <input type="radio" name="photo-2" value="2" data-field="photo-2">
+          <input type="radio" name="photo-2" value="3" data-field="photo-2">
+          <input type="radio" name="photo-2" value="4" data-field="photo-2">
+          <input type="radio" name="photo-2" value="5" data-field="photo-2">
+        </div>
+      </div>
+      <div class="rating-row">
+        <span>تعبير ودود (ابتسامة، مريح)</span>
+        <div class="rating-circles">
+          <input type="radio" name="photo-3" value="1" data-field="photo-3">
+          <input type="radio" name="photo-3" value="2" data-field="photo-3">
+          <input type="radio" name="photo-3" value="3" data-field="photo-3">
+          <input type="radio" name="photo-3" value="4" data-field="photo-3">
+          <input type="radio" name="photo-3" value="5" data-field="photo-3">
+        </div>
+      </div>
+    </div>
+
+    <!-- Headline -->
+    <div class="audit-section">
+      <div class="audit-title">
+        <span class="audit-icon">✍️</span> العنوان - Headline
+      </div>
+      <div class="rating-row">
+        <span>يتجاوز "Student" أو "Graduate"</span>
+        <div class="rating-circles">
+          <input type="radio" name="headline-1" value="1" data-field="headline-1">
+          <input type="radio" name="headline-1" value="2" data-field="headline-1">
+          <input type="radio" name="headline-1" value="3" data-field="headline-1">
+          <input type="radio" name="headline-1" value="4" data-field="headline-1">
+          <input type="radio" name="headline-1" value="5" data-field="headline-1">
+        </div>
+      </div>
+      <div class="rating-row">
+        <span>يتضمن تخصصك وأهم مهاراتك</span>
+        <div class="rating-circles">
+          <input type="radio" name="headline-2" value="1" data-field="headline-2">
+          <input type="radio" name="headline-2" value="2" data-field="headline-2">
+          <input type="radio" name="headline-2" value="3" data-field="headline-2">
+          <input type="radio" name="headline-2" value="4" data-field="headline-2">
+          <input type="radio" name="headline-2" value="5" data-field="headline-2">
+        </div>
+      </div>
+      <div class="rating-row">
+        <span>يستخدم كلمات مفتاحية يبحث عنها مسؤولو التوظيف</span>
+        <div class="rating-circles">
+          <input type="radio" name="headline-3" value="1" data-field="headline-3">
+          <input type="radio" name="headline-3" value="2" data-field="headline-3">
+          <input type="radio" name="headline-3" value="3" data-field="headline-3">
+          <input type="radio" name="headline-3" value="4" data-field="headline-3">
+          <input type="radio" name="headline-3" value="5" data-field="headline-3">
+        </div>
+      </div>
+      <div class="write-area">
+        <div class="write-label">اكتب عنوانك المحسّن:</div>
+        <div class="write-line"><input type="text" class="editable-input" data-field="headline-draft" placeholder='مثال: Junior UX Designer | Mobile Apps | Figma & Adobe XD'></div>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="audit-section">
+      <div class="audit-title">
+        <span class="audit-icon">📝</span> قسم "عن" - About Section
+      </div>
+      <div class="rating-row">
+        <span>3-5 جمل تحكي قصتك المهنية</span>
+        <div class="rating-circles">
+          <input type="radio" name="about-1" value="1" data-field="about-1">
+          <input type="radio" name="about-1" value="2" data-field="about-1">
+          <input type="radio" name="about-1" value="3" data-field="about-1">
+          <input type="radio" name="about-1" value="4" data-field="about-1">
+          <input type="radio" name="about-1" value="5" data-field="about-1">
+        </div>
+      </div>
+      <div class="rating-row">
+        <span>يوضح ما تفعله وما أنت شغوف به</span>
+        <div class="rating-circles">
+          <input type="radio" name="about-2" value="1" data-field="about-2">
+          <input type="radio" name="about-2" value="2" data-field="about-2">
+          <input type="radio" name="about-2" value="3" data-field="about-2">
+          <input type="radio" name="about-2" value="4" data-field="about-2">
+          <input type="radio" name="about-2" value="5" data-field="about-2">
+        </div>
+      </div>
+      <div class="rating-row">
+        <span>يشرح القيمة التي تقدمها لأصحاب العمل</span>
+        <div class="rating-circles">
+          <input type="radio" name="about-3" value="1" data-field="about-3">
+          <input type="radio" name="about-3" value="2" data-field="about-3">
+          <input type="radio" name="about-3" value="3" data-field="about-3">
+          <input type="radio" name="about-3" value="4" data-field="about-3">
+          <input type="radio" name="about-3" value="5" data-field="about-3">
+        </div>
+      </div>
+      <div class="rating-row">
+        <span>ينتهي بدعوة للتواصل (open to opportunities)</span>
+        <div class="rating-circles">
+          <input type="radio" name="about-4" value="1" data-field="about-4">
+          <input type="radio" name="about-4" value="2" data-field="about-4">
+          <input type="radio" name="about-4" value="3" data-field="about-4">
+          <input type="radio" name="about-4" value="4" data-field="about-4">
+          <input type="radio" name="about-4" value="5" data-field="about-4">
+        </div>
+      </div>
+      <div class="write-area">
+        <div class="write-label">اكتب مسودة قسم "عن":</div>
+        <div class="write-line"><textarea class="editable-input" data-field="about-draft" placeholder="مثال: I'm a frontend developer passionate about creating clean, intuitive web experiences..."></textarea></div>
+      </div>
+    </div>
+
+    <!-- Experience & Skills -->
+    <div class="audit-section">
+      <div class="audit-title">
+        <span class="audit-icon">💼</span> الخبرة، المهارات والنشاط
+      </div>
+      <div class="rating-row">
+        <span>المشاريع، التدريب، أو العمل الحر مدرج</span>
+        <div class="rating-circles">
+          <input type="radio" name="exp-1" value="1" data-field="exp-1">
+          <input type="radio" name="exp-1" value="2" data-field="exp-1">
+          <input type="radio" name="exp-1" value="3" data-field="exp-1">
+          <input type="radio" name="exp-1" value="4" data-field="exp-1">
+          <input type="radio" name="exp-1" value="5" data-field="exp-1">
+        </div>
+      </div>
+      <div class="rating-row">
+        <span>قسم المهارات مملوء بكلمات مفتاحية ذات صلة</span>
+        <div class="rating-circles">
+          <input type="radio" name="exp-2" value="1" data-field="exp-2">
+          <input type="radio" name="exp-2" value="2" data-field="exp-2">
+          <input type="radio" name="exp-2" value="3" data-field="exp-2">
+          <input type="radio" name="exp-2" value="4" data-field="exp-2">
+          <input type="radio" name="exp-2" value="5" data-field="exp-2">
+        </div>
+      </div>
+      <div class="rating-row">
+        <span>نشاط منتظم: منشورات، تعليقات، أو مشاركات</span>
+        <div class="rating-circles">
+          <input type="radio" name="exp-3" value="1" data-field="exp-3">
+          <input type="radio" name="exp-3" value="2" data-field="exp-3">
+          <input type="radio" name="exp-3" value="3" data-field="exp-3">
+          <input type="radio" name="exp-3" value="4" data-field="exp-3">
+          <input type="radio" name="exp-3" value="5" data-field="exp-3">
+        </div>
+      </div>
+      <div class="rating-row">
+        <span>50+ اتصال في مجالك</span>
+        <div class="rating-circles">
+          <input type="radio" name="exp-4" value="1" data-field="exp-4">
+          <input type="radio" name="exp-4" value="2" data-field="exp-4">
+          <input type="radio" name="exp-4" value="3" data-field="exp-4">
+          <input type="radio" name="exp-4" value="4" data-field="exp-4">
+          <input type="radio" name="exp-4" value="5" data-field="exp-4">
+        </div>
+      </div>
+    </div>
+
+    <!-- Peer Review Section -->
+    <div class="peer-box">
+      <h3>ملاحظات الزميل - Peer Feedback</h3>
+      <div class="write-area">
+        <div class="write-label">اسم المراجع:</div>
+        <div class="write-line"><input type="text" class="editable-input" data-field="reviewer-name" placeholder="اسم زميلك"></div>
+      </div>
+      <div class="write-area">
+        <div class="write-label">نقطة قوة واحدة في هذا الحساب:</div>
+        <div class="write-line"><textarea class="editable-input" data-field="peer-strength" placeholder="اكتب نقطة قوة واحدة..."></textarea></div>
+      </div>
+      <div class="write-area">
+        <div class="write-label">نقطة واحدة للتحسين:</div>
+        <div class="write-line"><textarea class="editable-input" data-field="peer-improvement" placeholder="اكتب نقطة تحسين واحدة..."></textarea></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      منهج مهارات التوظيف &middot; برنامج الخريجين الجدد &middot; الجلسة 03: كتابة السيرة الذاتية وإتقان LinkedIn
+      <br>
+      <button onclick="saveData()" style="margin-top: 12px; padding: 6px 16px; background: #00b4d8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">💾 حفظ العمل</button>
+      <button onclick="downloadPDF()" style="margin-right: 8px; padding: 6px 16px; background: #2ec4b6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">📥 تحميل PDF</button>
+    </div>
+
+    <script>
+      // Load saved data on page load
+      window.addEventListener('DOMContentLoaded', function() {
+        loadData();
+      });
+
+      // Auto-save on input change
+      document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('editable-input') || e.target.id.startsWith('student')) {
+          autoSave();
+        }
+      });
+
+      // Auto-save on radio change
+      document.addEventListener('change', function(e) {
+        if (e.target.type === 'radio') {
+          autoSave();
+        }
+      });
+
+      function autoSave() {
+        const data = {};
+        
+        // Save student info
+        data.studentName = document.getElementById('studentName').value;
+        data.studentTrack = document.getElementById('studentTrack').value;
+        
+        // Save all editable inputs
+        document.querySelectorAll('.editable-input').forEach(input => {
+          const field = input.getAttribute('data-field');
+          data[field] = input.value;
+        });
+        
+        // Save radio button states
+        document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+          data[radio.name] = radio.value;
+        });
+        
+        localStorage.setItem('linkedin_audit_data', JSON.stringify(data));
+      }
+
+      function saveData() {
+        autoSave();
+        alert('✅ تم حفظ عملك بنجاح!');
+      }
+
+      function loadData() {
+        const saved = localStorage.getItem('linkedin_audit_data');
+        if (saved) {
+          const data = JSON.parse(saved);
+          
+          // Load student info
+          if (data.studentName) document.getElementById('studentName').value = data.studentName;
+          if (data.studentTrack) document.getElementById('studentTrack').value = data.studentTrack;
+          
+          // Load all editable inputs
+          document.querySelectorAll('.editable-input').forEach(input => {
+            const field = input.getAttribute('data-field');
+            if (data[field]) {
+              input.value = data[field];
+            }
+          });
+          
+          // Load radio button states
+          document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            if (data[radio.name] === radio.value) {
+              radio.checked = true;
+            }
+          });
+        }
+      }
+
+      function downloadPDF() {
+        window.print();
+      }
+    </script>
+  </body>
+</html>

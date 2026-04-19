@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>قائمة تحسين السيرة الذاتية - ورقة عمل</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          "Segoe UI",
+          -apple-system,
+          sans-serif;
+        color: #1b2a4a;
+        background: white;
+        padding: 24px;
+        max-width: 800px;
+        margin: 0 auto;
+        direction: rtl;
+        text-align: right;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 16px;
+        border-bottom: 3px solid #1b2a4a;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1b2a4a;
+      }
+      .header .session-tag {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: white;
+        background: #1b2a4a;
+        padding: 6px 14px;
+        border-radius: 4px;
+      }
+
+      /* Student Info */
+      .student-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .student-info .field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .student-info .field span {
+        color: #6c757d;
+        white-space: nowrap;
+      }
+      .student-info .field input {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #dee2e6;
+        background: transparent;
+        font-family: inherit;
+        font-size: inherit;
+        outline: none;
+        padding: 2px 4px;
+      }
+      .student-info .field input:focus {
+        background: #fffef0;
+        border-bottom-color: #00b4d8;
+      }
+
+      /* Instructions */
+      .instructions {
+        background: #f0f7ff;
+        border-right: 3px solid #00b4d8;
+        border-radius: 8px 0 0 8px;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #343a40;
+      }
+      .instructions strong {
+        color: #1b2a4a;
+      }
+
+      /* Section */
+      .section {
+        margin-bottom: 24px;
+      }
+      .section-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1b2a4a;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #00b4d8;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-num {
+        background: #00b4d8;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      /* Checklist */
+      .checklist {
+        list-style: none;
+      }
+      .checklist li {
+        font-size: 13px;
+        padding: 5px 28px 5px 0;
+        position: relative;
+        color: #343a40;
+        cursor: pointer;
+        transition: color 0.2s;
+        line-height: 1.5;
+      }
+      .checklist li:hover {
+        color: #00b4d8;
+      }
+      .checklist li input[type="checkbox"] {
+        position: absolute;
+        right: 0;
+        top: 7px;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        accent-color: #00b4d8;
+      }
+      .checklist li.checked {
+        color: #6c757d;
+        text-decoration: line-through;
+      }
+
+      /* Write Lines */
+      .write-area {
+        margin-top: 12px;
+      }
+      .write-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #6c757d;
+        margin-bottom: 6px;
+      }
+      .write-line {
+        border-bottom: 1px dotted #ccc;
+        min-height: 28px;
+        margin-bottom: 2px;
+        padding: 4px 0;
+      }
+      .editable-input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 13px;
+        color: inherit;
+        outline: none;
+        padding: 2px 0;
+      }
+      .editable-input:focus {
+        background: #fffef0;
+      }
+      textarea.editable-input {
+        resize: vertical;
+        min-height: 60px;
+        line-height: 1.5;
+      }
+
+      /* Track Section */
+      .track-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 12px;
+      }
+      .track-box {
+        border: 1.5px solid #dee2e6;
+        border-radius: 8px;
+        padding: 12px;
+      }
+      .track-box h4 {
+        font-size: 12px;
+        font-weight: 700;
+        color: #00b4d8;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+      .track-box ul {
+        list-style: none;
+      }
+      .track-box ul li {
+        font-size: 11.5px;
+        color: #343a40;
+        padding: 3px 0 3px 14px;
+        position: relative;
+        line-height: 1.4;
+      }
+      .track-box ul li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 9px;
+        width: 6px;
+        height: 6px;
+        background: #00b4d8;
+        border-radius: 50%;
+      }
+
+      /* Improvement Plan */
+      .improvement-grid {
+        display: grid;
+        grid-template-columns: 40px 1fr 1fr;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .improvement-grid .ig-header {
+        font-size: 11px;
+        font-weight: 700;
+        color: #6c757d;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #dee2e6;
+      }
+      .improvement-grid .ig-num {
+        font-size: 14px;
+        font-weight: 700;
+        color: #00b4d8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .improvement-grid .ig-cell {
+        border-bottom: 1px dotted #ccc;
+        min-height: 32px;
+        padding: 4px 0;
+      }
+      .improvement-grid .ig-cell input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 13px;
+        outline: none;
+        padding: 2px 0;
+      }
+      .improvement-grid .ig-cell input:focus {
+        background: #fffef0;
+      }
+
+      /* Footer */
+      .footer {
+        margin-top: 24px;
+        padding-top: 12px;
+        border-top: 1px solid #dee2e6;
+        font-size: 11px;
+        color: #6c757d;
+        text-align: center;
+      }
+
+      @media print {
+        body {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>قائمة تحسين السيرة الذاتية - CV Checklist</h1>
+      <div class="session-tag">الجلسة 03</div>
+    </div>
+
+    <div class="student-info">
+      <div class="field"><span>الاسم:</span><input type="text" id="studentName" placeholder="اكتب اسمك هنا"></div>
+      <div class="field"><span>التخصص:</span><input type="text" id="studentTrack" placeholder="مثال: تطوير برمجيات"></div>
+    </div>
+
+    <div class="instructions">
+      <strong>التعليمات:</strong> راجع سيرتك الذاتية الحالية (أو خطط لواحدة) مقابل هذه القائمة. ضع علامة على العناصر الموجودة لديك، واستخدم خطة التحسين في الأسفل لكتابة 3 تغييرات محددة ستقوم بها هذا الأسبوع.
+    </div>
+
+    <!-- Section 1: Header -->
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num">1</span> الترويسة / معلومات الاتصال - Header
+      </div>
+      <ul class="checklist">
+        <li><input type="checkbox" onclick="toggleCheck(this)"> الاسم الكامل معروض بشكل بارز</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> إيميل مهني (ليس اسم دلع أو غير مناسب)</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> رقم الهاتف مع رمز الدولة (+962)</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> رابط LinkedIn مضمّن</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> رابط Portfolio / GitHub / Behance (إن وُجد)</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> لا توجد معلومات شخصية غير ضرورية (العمر، الحالة الاجتماعية، الصورة*)</li>
+      </ul>
+    </div>
+
+    <!-- Section 2: Professional Summary -->
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num">2</span> الملخص المهني - Professional Summary
+      </div>
+      <ul class="checklist">
+        <li><input type="checkbox" onclick="toggleCheck(this)"> 3-4 أسطر كحد أقصى</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> يوضح من أنت وهدفك المهني</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> يبرز أهم المهارات المتعلقة بالوظيفة</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> مخصص لكل وظيفة (ليس عام)</li>
+      </ul>
+      <div class="write-area">
+        <div class="write-label">اكتب مسودة ملخصك المهني:</div>
+        <div class="write-line"><textarea class="editable-input" data-field="summary" placeholder="مثال: Junior Frontend Developer with hands-on experience in React and TypeScript..."></textarea></div>
+      </div>
+    </div>
+
+    <!-- Section 3: Skills -->
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num">3</span> قسم المهارات - Skills Section
+      </div>
+      <ul class="checklist">
+        <li><input type="checkbox" onclick="toggleCheck(this)"> يتضمن مهارات تقنية (Hard Skills) ومهارات ناعمة (Soft Skills)</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> يستخدم كلمات مفتاحية من إعلان الوظيفة المستهدف</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> المهارات محددة (مثل: "React, Node.js" وليس فقط "programming")</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> لا توجد مهارات قديمة أو غير ذات صلة</li>
+      </ul>
+    </div>
+
+    <!-- Section 4: Education -->
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num">4</span> التعليم - Education
+      </div>
+      <ul class="checklist">
+        <li><input type="checkbox" onclick="toggleCheck(this)"> الشهادة، الجامعة، وسنة التخرج مذكورة</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> المعدل مضمّن إذا كان قوي (3.5+)</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> مواد دراسية أو مشروع تخرج ذو صلة مذكور</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> الشهادات المهنية مدرجة (Google, HubSpot, Meta, إلخ)</li>
+      </ul>
+    </div>
+
+    <!-- Section 5: Projects / Portfolio -->
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num">5</span> المشاريع / الأعمال - Projects / Portfolio
+      </div>
+      <ul class="checklist">
+        <li><input type="checkbox" onclick="toggleCheck(this)"> على الأقل 2-3 مشاريع حقيقية موصوفة</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> كل مشروع له نتائج قابلة للقياس (أرقام، نتائج)</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> التقنيات أو الأدوات المستخدمة مذكورة لكل مشروع</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> روابط للمشاريع المباشرة، Repos، أو أعمال Portfolio</li>
+      </ul>
+    </div>
+
+    <!-- Section 6: Experience -->
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num">6</span> الخبرة - Experience
+      </div>
+      <ul class="checklist">
+        <li><input type="checkbox" onclick="toggleCheck(this)"> يتضمن تدريب، عمل حر، عمل جزئي، أو عمل تطوعي</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> يستخدم أفعال عمل: "Built", "Led", "Designed", "Increased"</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> يتضمن مقاييس حيثما أمكن: "Increased X by Y%"</li>
+        <li><input type="checkbox" onclick="toggleCheck(this)"> الخبرة الأحدث مدرجة أولاً (ترتيب زمني عكسي)</li>
+      </ul>
+    </div>
+
+    <!-- Track-Specific Tips -->
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num">+</span> متطلبات خاصة بالتخصص
+      </div>
+      <div class="track-grid">
+        <div class="track-box">
+          <h4>التسويق الرقمي - Digital Marketing</h4>
+          <ul>
+            <li>اذكر المنصات: Google Ads, Meta Ads, SEO tools</li>
+            <li>أظهر نتائج الحملات: CTR, ROAS, reach</li>
+            <li>رابط لنماذج محتوى</li>
+            <li>الشهادات: Google, HubSpot, Meta Blueprint</li>
+          </ul>
+        </div>
+        <div class="track-box">
+          <h4>تطوير البرمجيات - Software Development</h4>
+          <ul>
+            <li>رابط GitHub إجباري - اجعل الـ repos نظيفة</li>
+            <li>اذكر اللغات والأطر (Frameworks)</li>
+            <li>وصف: مشكلة ← حل ← تقنيات</li>
+            <li>ضمّن تطبيقات deployed / روابط مباشرة</li>
+          </ul>
+        </div>
+        <div class="track-box">
+          <h4>تطبيقات الموبايل - Mobile Application</h4>
+          <ul>
+            <li>اذكر المنصات: iOS (Swift), Android (Kotlin), Flutter</li>
+            <li>ضمّن روابط متجر التطبيقات إن نُشرت</li>
+            <li>أظهر حساسيتك لـ UI/UX</li>
+            <li>تكاملات API وخبرة Backend</li>
+          </ul>
+        </div>
+        <div class="track-box">
+          <h4>التصميم الجرافيكي - Graphic Design</h4>
+          <ul>
+            <li>رابط Portfolio (Behance/Dribbble) في الأعلى</li>
+            <li>الأدوات: Adobe CC, Figma, Canva, Illustrator</li>
+            <li>الأنواع: branding, UI, print, social media</li>
+            <li>أظهر العملية، ليس فقط النتيجة النهائية</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Improvement Plan -->
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num" style="background: #f4a623;">!</span> 3 تحسينات سأقوم بها هذا الأسبوع
+      </div>
+      <div class="improvement-grid">
+        <span class="ig-header">#</span>
+        <span class="ig-header">ما سأغيره</span>
+        <span class="ig-header">متى</span>
+        <span class="ig-num">1</span>
+        <span class="ig-cell"><input type="text" class="editable-input" data-field="improvement-1-what" placeholder="مثال: إضافة أرقام ونتائج لقسم الخبرة"></span>
+        <span class="ig-cell"><input type="text" class="editable-input" data-field="improvement-1-when" placeholder="مثال: الأربعاء"></span>
+        <span class="ig-num">2</span>
+        <span class="ig-cell"><input type="text" class="editable-input" data-field="improvement-2-what" placeholder="مثال: تحديث الملخص المهني"></span>
+        <span class="ig-cell"><input type="text" class="editable-input" data-field="improvement-2-when" placeholder="مثال: الخميس"></span>
+        <span class="ig-num">3</span>
+        <span class="ig-cell"><input type="text" class="editable-input" data-field="improvement-3-what" placeholder="مثال: إضافة روابط المشاريع"></span>
+        <span class="ig-cell"><input type="text" class="editable-input" data-field="improvement-3-when" placeholder="مثال: الجمعة"></span>
+      </div>
+    </div>
+
+    <div class="footer">
+      منهج مهارات التوظيف &middot; برنامج الخريجين الجدد &middot; الجلسة 03: كتابة السيرة الذاتية وإتقان LinkedIn
+      <br>
+      <button onclick="saveData()" style="margin-top: 12px; padding: 6px 16px; background: #00b4d8; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">💾 حفظ العمل</button>
+      <button onclick="downloadPDF()" style="margin-right: 8px; padding: 6px 16px; background: #2ec4b6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">📥 تحميل PDF</button>
+    </div>
+
+    <script>
+      // Load saved data on page load
+      window.addEventListener('DOMContentLoaded', function() {
+        loadData();
+      });
+
+      // Auto-save on input change
+      document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('editable-input') || e.target.id.startsWith('student')) {
+          autoSave();
+        }
+      });
+
+      // Auto-save on checkbox change
+      document.addEventListener('change', function(e) {
+        if (e.target.type === 'checkbox') {
+          autoSave();
+        }
+      });
+
+      function autoSave() {
+        const data = {};
+        
+        // Save student info
+        data.studentName = document.getElementById('studentName').value;
+        data.studentTrack = document.getElementById('studentTrack').value;
+        
+        // Save all editable inputs
+        document.querySelectorAll('.editable-input').forEach(input => {
+          const field = input.getAttribute('data-field');
+          data[field] = input.value;
+        });
+        
+        // Save checkbox states
+        document.querySelectorAll('.checklist input[type="checkbox"]').forEach((checkbox, index) => {
+          data[`checkbox-${index}`] = checkbox.checked;
+        });
+        
+        localStorage.setItem('cv_checklist_data', JSON.stringify(data));
+      }
+
+      function saveData() {
+        autoSave();
+        alert('✅ تم حفظ عملك بنجاح!');
+      }
+
+      function loadData() {
+        const saved = localStorage.getItem('cv_checklist_data');
+        if (saved) {
+          const data = JSON.parse(saved);
+          
+          // Load student info
+          if (data.studentName) document.getElementById('studentName').value = data.studentName;
+          if (data.studentTrack) document.getElementById('studentTrack').value = data.studentTrack;
+          
+          // Load all editable inputs
+          document.querySelectorAll('.editable-input').forEach(input => {
+            const field = input.getAttribute('data-field');
+            if (data[field]) {
+              input.value = data[field];
+            }
+          });
+          
+          // Load checkbox states
+          document.querySelectorAll('.checklist input[type="checkbox"]').forEach((checkbox, index) => {
+            if (data[`checkbox-${index}`]) {
+              checkbox.checked = true;
+              toggleCheck(checkbox);
+            }
+          });
+        }
+      }
+
+      function downloadPDF() {
+        window.print();
+      }
+
+      function toggleCheck(checkbox) {
+        const li = checkbox.parentElement;
+        if (checkbox.checked) {
+          li.classList.add('checked');
+        } else {
+          li.classList.remove('checked');
+        }
+      }
+    </script>
+  </body>
+</html>
