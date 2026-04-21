@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>خطة البحث عن وظيفة ورسالة التواصل - ورقة عمل</title>
+    <style>
+      @page { size: A4; margin: 15mm; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: 'Segoe UI', -apple-system, sans-serif;
+        color: #1b2a4a;
+        background: white;
+        padding: 24px;
+        max-width: 800px;
+        margin: 0 auto;
+        direction: rtl;
+        text-align: right;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 16px;
+        border-bottom: 3px solid #1b2a4a;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1b2a4a;
+      }
+      .header .session-tag {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: white;
+        background: #1b2a4a;
+        padding: 6px 14px;
+        border-radius: 4px;
+      }
+
+      .student-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .student-info .field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .student-info .field span {
+        color: #6c757d;
+        white-space: nowrap;
+      }
+      .student-info .field input {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #dee2e6;
+        background: transparent;
+        font-family: inherit;
+        font-size: inherit;
+        outline: none;
+        padding: 2px 4px;
+      }
+      .student-info .field input:focus {
+        background: #fffef0;
+        border-bottom-color: #667eea;
+      }
+
+      .instructions {
+        background: #f0f7ff;
+        border-right: 3px solid #1b2a4a;
+        border-radius: 8px 0 0 8px;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #343a40;
+      }
+
+      .stat-banner {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        background: #1b2a4a;
+        color: white;
+        padding: 14px 20px;
+        border-radius: 8px;
+        margin-bottom: 24px;
+      }
+      .stat {
+        text-align: center;
+      }
+      .stat .number {
+        font-size: 28px;
+        font-weight: 800;
+        color: #667eea;
+      }
+      .stat .label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 2px;
+      }
+
+      .section {
+        margin-bottom: 24px;
+      }
+      .section-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1b2a4a;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #667eea;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-num {
+        background: #667eea;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .write-area {
+        margin-top: 12px;
+      }
+      .write-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #6c757d;
+        margin-bottom: 6px;
+      }
+      .write-line {
+        border-bottom: 1px dotted #ccc;
+        min-height: 28px;
+        margin-bottom: 2px;
+        padding: 4px 0;
+      }
+      .editable-input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 13px;
+        color: inherit;
+        outline: none;
+        padding: 2px 0;
+      }
+      .editable-input:focus {
+        background: #fffef0;
+      }
+      textarea.editable-input {
+        resize: vertical;
+        min-height: 80px;
+        line-height: 1.5;
+      }
+
+      .target-grid {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        gap: 6px 10px;
+        margin-top: 8px;
+      }
+      .target-grid .tg-num {
+        font-size: 14px;
+        font-weight: 700;
+        color: #667eea;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .target-grid .tg-cell {
+        border-bottom: 1px dotted #ccc;
+        min-height: 30px;
+        padding: 4px 0;
+      }
+      .target-grid .tg-cell input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 13px;
+        outline: none;
+        padding: 2px 0;
+      }
+      .target-grid .tg-cell input:focus {
+        background: #fffef0;
+      }
+
+      .plan-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 12px;
+      }
+      .plan-table th {
+        background: #667eea;
+        color: white;
+        padding: 8px 10px;
+        text-align: right;
+        font-weight: 600;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .plan-table td {
+        padding: 10px;
+        border-bottom: 1px solid #dee2e6;
+        vertical-align: top;
+        color: #6c757d;
+        line-height: 1.4;
+      }
+      .plan-table td:first-child {
+        font-weight: 600;
+        color: #1b2a4a;
+        width: 140px;
+      }
+      .plan-table .fill-cell {
+        border-bottom: 1px dotted #ccc;
+        min-height: 24px;
+        padding: 4px 0;
+      }
+      .plan-table .fill-cell input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 12px;
+        outline: none;
+        padding: 2px 0;
+      }
+      .plan-table .fill-cell input:focus {
+        background: #fffef0;
+      }
+
+      .outreach-box {
+        background: #f0f7ff;
+        border: 1.5px solid #667eea;
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 20px;
+      }
+      .outreach-box h3 {
+        font-size: 14px;
+        font-weight: 700;
+        color: #667eea;
+        margin-bottom: 10px;
+      }
+
+      .peer-box {
+        background: #fef9f0;
+        border: 1.5px solid #f4a623;
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 24px;
+      }
+      .peer-box h3 {
+        font-size: 14px;
+        font-weight: 700;
+        color: #f4a623;
+        margin-bottom: 10px;
+      }
+
+      .footer {
+        margin-top: 24px;
+        padding-top: 12px;
+        border-top: 1px solid #dee2e6;
+        font-size: 11px;
+        color: #6c757d;
+        text-align: center;
+      }
+
+      @media print {
+        body { padding: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>خطة البحث عن وظيفة ورسالة التواصل</h1>
+      <div class="session-tag">الجلسة 04</div>
+    </div>
+
+    <div class="student-info">
+      <div class="field"><span>الاسم:</span><input type="text" id="studentName" placeholder="اكتب اسمك هنا"></div>
+      <div class="field"><span>التخصص:</span><input type="text" id="studentTrack" placeholder="مثال: تطوير برمجيات"></div>
+    </div>
+
+    <div class="instructions">
+      <strong>التعليمات:</strong> أكمل الجزء 1 لبناء خطة البحث الأسبوعية مع أهداف محددة. ثم أكمل الجزء 2 لكتابة رسالة تواصل حقيقية يمكنك إرسالها اليوم.
+    </div>
+
+    <div class="stat-banner">
+      <div class="stat">
+        <div class="number">80%</div>
+        <div class="label">من الوظائف في<br />السوق المخفي</div>
+      </div>
+      <div class="stat">
+        <div class="number">70%</div>
+        <div class="label">يجدون وظائف<br />عبر التشبيك</div>
+      </div>
+      <div class="stat">
+        <div class="number">5</div>
+        <div class="label">طلبات مخصصة أفضل<br />من 50 عامة</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num">1</span> أهداف البحث عن وظيفة
+      </div>
+
+      <div class="write-area">
+        <div class="write-label">3 مسميات وظيفية مستهدفة:</div>
+        <div class="target-grid">
+          <span class="tg-num">1</span><span class="tg-cell"><input type="text" class="editable-input" data-field="job-title-1" placeholder="مثال: Junior Frontend Developer"></span>
+          <span class="tg-num">2</span><span class="tg-cell"><input type="text" class="editable-input" data-field="job-title-2"></span>
+          <span class="tg-num">3</span><span class="tg-cell"><input type="text" class="editable-input" data-field="job-title-3"></span>
+        </div>
+      </div>
+
+      <div class="write-area">
+        <div class="write-label">5 شركات مستهدفة:</div>
+        <div class="target-grid">
+          <span class="tg-num">1</span><span class="tg-cell"><input type="text" class="editable-input" data-field="company-1" placeholder="مثال: شركة XYZ"></span>
+          <span class="tg-num">2</span><span class="tg-cell"><input type="text" class="editable-input" data-field="company-2"></span>
+          <span class="tg-num">3</span><span class="tg-cell"><input type="text" class="editable-input" data-field="company-3"></span>
+          <span class="tg-num">4</span><span class="tg-cell"><input type="text" class="editable-input" data-field="company-4"></span>
+          <span class="tg-num">5</span><span class="tg-cell"><input type="text" class="editable-input" data-field="company-5"></span>
+        </div>
+      </div>
+
+      <div class="write-area">
+        <div class="write-label">3 منصات سأستخدمها:</div>
+        <div class="target-grid">
+          <span class="tg-num">1</span><span class="tg-cell"><input type="text" class="editable-input" data-field="platform-1" placeholder="مثال: LinkedIn Jobs"></span>
+          <span class="tg-num">2</span><span class="tg-cell"><input type="text" class="editable-input" data-field="platform-2"></span>
+          <span class="tg-num">3</span><span class="tg-cell"><input type="text" class="editable-input" data-field="platform-3"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num" style="background: #667eea">2</span> خطتي الأسبوعية
+      </div>
+      <table class="plan-table">
+        <tr>
+          <th>النشاط</th>
+          <th>الهدف الأسبوعي</th>
+          <th>متى / كيف</th>
+        </tr>
+        <tr>
+          <td>التقديم على وظائف<br /><small>(السوق المرئي)</small></td>
+          <td><div class="fill-cell"><input type="text" class="editable-input" data-field="plan-apply-goal" placeholder="مثال: 5 طلبات مخصصة"></div></td>
+          <td><div class="fill-cell"><input type="text" class="editable-input" data-field="plan-apply-when" placeholder="مثال: كل يوم اثنين وأربعاء"></div></td>
+        </tr>
+        <tr>
+          <td>رسائل تواصل<br /><small>(السوق المخفي)</small></td>
+          <td><div class="fill-cell"><input type="text" class="editable-input" data-field="plan-outreach-goal" placeholder="مثال: 3 رسائل"></div></td>
+          <td><div class="fill-cell"><input type="text" class="editable-input" data-field="plan-outreach-when"></div></td>
+        </tr>
+        <tr>
+          <td>تطوير المهارات<br /><small>(دورات / مشاريع)</small></td>
+          <td><div class="fill-cell"><input type="text" class="editable-input" data-field="plan-skills-goal" placeholder="مثال: ساعة يومياً"></div></td>
+          <td><div class="fill-cell"><input type="text" class="editable-input" data-field="plan-skills-when"></div></td>
+        </tr>
+        <tr>
+          <td>نشاط LinkedIn<br /><small>(منشورات / تعليقات)</small></td>
+          <td><div class="fill-cell"><input type="text" class="editable-input" data-field="plan-linkedin-goal" placeholder="مثال: 5 تعليقات مفيدة"></div></td>
+          <td><div class="fill-cell"><input type="text" class="editable-input" data-field="plan-linkedin-when"></div></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num" style="background: #667eea">3</span> رسالة التواصل
+      </div>
+      <div class="outreach-box" style="margin-top: 0; border: none; background: #f0f7ff;">
+        <div class="write-area">
+        <div class="write-label">اسم الشخص ودوره:</div>
+        <div class="write-line"><input type="text" class="editable-input" data-field="outreach-person" placeholder="مثال: أحمد محمد - Senior Developer"></div>
+      </div>
+      <div class="write-area">
+        <div class="write-label">شركته:</div>
+        <div class="write-line"><input type="text" class="editable-input" data-field="outreach-company" placeholder="مثال: شركة ABC"></div>
+      </div>
+      <div class="write-area">
+        <div class="write-label">شيء محدد لاحظته عنه/عن عمله:</div>
+        <div class="write-line"><input type="text" class="editable-input" data-field="outreach-specific" placeholder="مثال: شفت مشروعك الأخير على GitHub وأعجبني..."></div>
+      </div>
+      <div class="write-area">
+        <div class="write-label">رسالتي:</div>
+        <div class="write-line"><textarea class="editable-input" data-field="outreach-message" placeholder="اكتب رسالتك هنا... تذكر: اطلب نصيحة - مش وظيفة!"></textarea></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="peer-box">
+      <h3>ملاحظات الزميل - Peer Feedback</h3>
+      <div class="write-area">
+        <div class="write-label">اسم المراجع:</div>
+        <div class="write-line"><input type="text" class="editable-input" data-field="peer-name"></div>
+      </div>
+      <div class="write-area">
+        <div class="write-label">هل سترد على هذه الرسالة؟ لماذا / لماذا لا؟</div>
+        <div class="write-line"><textarea class="editable-input" data-field="peer-response"></textarea></div>
+      </div>
+      <div class="write-area">
+        <div class="write-label">اقتراح واحد للتحسين:</div>
+        <div class="write-line"><input type="text" class="editable-input" data-field="peer-suggestion"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      منهج مهارات التوظيف &middot; برنامج الخريجين الجدد &middot; الجلسة 04: استراتيجيات البحث عن وظيفة
+      <br>
+      <button onclick="saveData()" style="margin-top: 12px; padding: 6px 16px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">💾 حفظ العمل</button>
+      <button onclick="downloadPDF()" style="margin-right: 8px; padding: 6px 16px; background: #2ec4b6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">📥 تحميل PDF</button>
+    </div>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        loadData();
+      });
+
+      document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('editable-input') || e.target.id.startsWith('student')) {
+          autoSave();
+        }
+      });
+
+      function autoSave() {
+        const data = {};
+        data.studentName = document.getElementById('studentName').value;
+        data.studentTrack = document.getElementById('studentTrack').value;
+        
+        document.querySelectorAll('.editable-input').forEach(input => {
+          const field = input.getAttribute('data-field');
+          data[field] = input.value;
+        });
+        
+        localStorage.setItem('job_search_data', JSON.stringify(data));
+      }
+
+      function saveData() {
+        autoSave();
+        alert('✅ تم حفظ عملك بنجاح!');
+      }
+
+      function loadData() {
+        const saved = localStorage.getItem('job_search_data');
+        if (saved) {
+          const data = JSON.parse(saved);
+          if (data.studentName) document.getElementById('studentName').value = data.studentName;
+          if (data.studentTrack) document.getElementById('studentTrack').value = data.studentTrack;
+          
+          document.querySelectorAll('.editable-input').forEach(input => {
+            const field = input.getAttribute('data-field');
+            if (data[field]) {
+              input.value = data[field];
+            }
+          });
+        }
+      }
+
+      function downloadPDF() {
+        window.print();
+      }
+    </script>
+  </body>
+</html>
