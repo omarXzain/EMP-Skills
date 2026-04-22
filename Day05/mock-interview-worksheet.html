@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>تمرين المقابلة التجريبية - ورقة عمل</title>
+    <style>
+      @page { size: A4; margin: 15mm; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: 'Segoe UI', -apple-system, sans-serif;
+        color: #1b2a4a;
+        background: white;
+        padding: 24px;
+        max-width: 800px;
+        margin: 0 auto;
+        direction: rtl;
+        text-align: right;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 16px;
+        border-bottom: 3px solid #1b2a4a;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1b2a4a;
+      }
+      .header .session-tag {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: white;
+        background: #1b2a4a;
+        padding: 6px 14px;
+        border-radius: 4px;
+      }
+
+      .student-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .student-info .field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .student-info .field span {
+        color: #6c757d;
+        white-space: nowrap;
+      }
+      .student-info .field input {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #dee2e6;
+        background: transparent;
+        font-family: inherit;
+        font-size: inherit;
+        outline: none;
+        padding: 2px 4px;
+      }
+      .student-info .field input:focus {
+        background: #fffef0;
+        border-bottom-color: #2563eb;
+      }
+
+      .instructions {
+        background: #f0f7ff;
+        border-right: 3px solid #2563eb;
+        border-radius: 8px 0 0 8px;
+        padding: 12px 16px;
+        margin-bottom: 20px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #343a40;
+      }
+
+      .section {
+        margin-bottom: 24px;
+      }
+      .section-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1b2a4a;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #2563eb;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-num {
+        background: #2563eb;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .question-list {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .question-list li {
+        font-size: 12px;
+        color: #343a40;
+        padding: 8px 12px;
+        background: #eff6ff;
+        border-radius: 6px;
+        border-right: 3px solid #2563eb;
+        line-height: 1.4;
+      }
+
+      .star-box {
+        border: 1.5px solid #2563eb;
+        border-radius: 8px;
+        padding: 14px;
+        margin-top: 12px;
+      }
+      .star-box h3 {
+        font-size: 14px;
+        font-weight: 700;
+        color: #2563eb;
+        margin-bottom: 10px;
+      }
+      .star-row {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 6px;
+        margin-bottom: 6px;
+      }
+      .star-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: #2563eb;
+        padding-top: 6px;
+      }
+
+      .write-area {
+        margin-top: 12px;
+      }
+      .write-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #6c757d;
+        margin-bottom: 6px;
+      }
+      .write-line {
+        border-bottom: 1px dotted #ccc;
+        min-height: 28px;
+        margin-bottom: 2px;
+        padding: 4px 0;
+      }
+      .editable-input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 13px;
+        color: inherit;
+        outline: none;
+        padding: 2px 0;
+      }
+      .editable-input:focus {
+        background: #fffef0;
+      }
+      textarea.editable-input {
+        resize: vertical;
+        min-height: 60px;
+        line-height: 1.5;
+      }
+
+      .round-box {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 14px;
+        margin-bottom: 14px;
+      }
+      .round-box h4 {
+        font-size: 13px;
+        font-weight: 700;
+        color: #1b2a4a;
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid #2563eb;
+      }
+
+      .feedback-row {
+        display: grid;
+        grid-template-columns: 1fr 180px;
+        gap: 10px;
+        padding: 5px 0;
+        font-size: 12px;
+        color: #343a40;
+        border-bottom: 1px solid #e9ecef;
+      }
+      .feedback-row:last-child {
+        border-bottom: none;
+      }
+      .mini-circles {
+        display: flex;
+        gap: 2px;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      .mini-circles label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        font-size: 10px;
+        color: #6c757d;
+        font-weight: 600;
+        width: 26px;
+      }
+      .mini-circles input[type="radio"] {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        accent-color: #2563eb;
+        margin: 0;
+      }
+      .rating-scale {
+        display: grid;
+        grid-template-columns: 1fr 180px;
+        gap: 10px;
+        align-items: center;
+        padding: 4px 0 8px;
+        font-size: 11px;
+        color: #6c757d;
+        border-bottom: 1px dashed #dee2e6;
+        margin-bottom: 4px;
+      }
+      .rating-scale .scale-ends {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 700;
+        color: #1b2a4a;
+      }
+      .rating-scale .scale-ends span:first-child { color: #d62828; }
+      .rating-scale .scale-ends span:last-child { color: #2a9d8f; }
+
+      .peer-box {
+        background: #fef9f0;
+        border: 1.5px solid #f4a623;
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 24px;
+      }
+      .peer-box h3 {
+        font-size: 14px;
+        font-weight: 700;
+        color: #f4a623;
+        margin-bottom: 10px;
+      }
+
+      .footer {
+        margin-top: 24px;
+        padding-top: 12px;
+        border-top: 1px solid #dee2e6;
+        font-size: 11px;
+        color: #6c757d;
+        text-align: center;
+      }
+
+      @media print {
+        body { padding: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>تمرين المقابلة التجريبية</h1>
+      <div class="session-tag">الجلسة 05</div>
+    </div>
+
+    <div class="student-info">
+      <div class="field"><span>الاسم:</span><input type="text" id="studentName" placeholder="اكتب اسمك هنا"></div>
+      <div class="field"><span>التخصص:</span><input type="text" id="studentTrack" placeholder="مثال: تطوير برمجيات"></div>
+    </div>
+
+    <div class="instructions">
+      <strong>التعليمات:</strong> استخدم الجزء أ لتحضير إجابات STAR. خلال المقابلة التجريبية، يستخدم زميلك الجزء ب لتقييم أدائك وإعطاء ملاحظات. ثم بدّلوا الأدوار.
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num">أ</span> بنك أسئلة المقابلة
+      </div>
+      <p style="font-size: 12px; color: #6c757d; margin-bottom: 6px;">كمقابِل، اختر 3 أسئلة لتسألها. كمرشح، حضّر إجابات STAR.</p>
+      <ul class="question-list">
+        <li>احكيلي عن حالك - Tell me about yourself</li>
+        <li>ليش بدك تشتغل عنا؟ - Why do you want to work here?</li>
+        <li>ايش أهم 3 نقاط قوة عندك؟ - What are your top 3 strengths?</li>
+        <li>ايش أكبر نقطة ضعف عندك؟ - What is your biggest weakness?</li>
+        <li>احكيلي عن مرة اشتغلت بفريق - Tell me about a time you worked in a team</li>
+        <li>وصفلي تحدي تغلبت عليه - Describe a challenge you overcame</li>
+        <li>اعطيني مثال عن غلطة وايش تعلمت - Give an example of a mistake</li>
+        <li>احكيلي عن مشروع فخور فيه - Tell me about a project you're proud of</li>
+        <li>كيف بتتعامل مع المواعيد الضيقة؟ - How do you handle tight deadlines?</li>
+        <li>ليش لازم نوظفك؟ - Why should we hire you?</li>
+      </ul>
+    </div>
+
+    <div class="star-box">
+      <h3>تحضير إجابة STAR</h3>
+      <div class="write-area">
+        <div class="write-label">السؤال اللي بحضرله:</div>
+        <div class="write-line"><input type="text" class="editable-input" data-field="star-question"></div>
+      </div>
+      <div class="star-row">
+        <span class="star-label">S : Situation</span>
+        <div class="write-line"><input type="text" class="editable-input" data-field="star-s" placeholder="الموقف - وين كنت؟ ايش كان السياق؟"></div>
+      </div>
+      <div class="star-row">
+        <span class="star-label">T : Task</span>
+        <div class="write-line"><input type="text" class="editable-input" data-field="star-t" placeholder="المهمة - ايش كانت مسؤوليتك؟"></div>
+      </div>
+      <div class="star-row">
+        <span class="star-label">A : Action</span>
+        <div class="write-line"><input type="text" class="editable-input" data-field="star-a" placeholder="الإجراء - ايش عملت أنت تحديداً؟"></div>
+      </div>
+      <div class="star-row">
+        <span class="star-label">R : Result</span>
+        <div class="write-line"><input type="text" class="editable-input" data-field="star-r" placeholder="النتيجة - ايش صار؟ استخدم أرقام"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <span class="section-num">ب</span> ملاحظات المقابلة (يملأها زميلك)
+      </div>
+
+      <div class="round-box">
+        <h4>الجولة 1 | أنا: ☐ المقابِل &nbsp; ☐ المرشح</h4>
+        <div class="write-area">
+          <div class="write-label">اسم الزميل:</div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="round1-partner"></div>
+        </div>
+        <div class="rating-scale">
+          <span>مقياس التقييم:</span>
+          <div class="scale-ends"><span>1 = ضعيف</span><span>5 = ممتاز</span></div>
+        </div>
+        <div class="feedback-row">
+          <span>إجابات واضحة ومنظمة (استخدم STAR)</span>
+          <div class="mini-circles">
+            <label><input type="radio" name="round1-q1" value="1" data-field="round1-q1"><span>1</span></label>
+            <label><input type="radio" name="round1-q1" value="2" data-field="round1-q1"><span>2</span></label>
+            <label><input type="radio" name="round1-q1" value="3" data-field="round1-q1"><span>3</span></label>
+            <label><input type="radio" name="round1-q1" value="4" data-field="round1-q1"><span>4</span></label>
+            <label><input type="radio" name="round1-q1" value="5" data-field="round1-q1"><span>5</span></label>
+          </div>
+        </div>
+        <div class="feedback-row">
+          <span>لغة جسد واثقة (تواصل بصري، وقفة)</span>
+          <div class="mini-circles">
+            <label><input type="radio" name="round1-q2" value="1" data-field="round1-q2"><span>1</span></label>
+            <label><input type="radio" name="round1-q2" value="2" data-field="round1-q2"><span>2</span></label>
+            <label><input type="radio" name="round1-q2" value="3" data-field="round1-q2"><span>3</span></label>
+            <label><input type="radio" name="round1-q2" value="4" data-field="round1-q2"><span>4</span></label>
+            <label><input type="radio" name="round1-q2" value="5" data-field="round1-q2"><span>5</span></label>
+          </div>
+        </div>
+        <div class="feedback-row">
+          <span>تحدث بسرعة مناسبة (لا سريع/بطيء جداً)</span>
+          <div class="mini-circles">
+            <label><input type="radio" name="round1-q3" value="1" data-field="round1-q3"><span>1</span></label>
+            <label><input type="radio" name="round1-q3" value="2" data-field="round1-q3"><span>2</span></label>
+            <label><input type="radio" name="round1-q3" value="3" data-field="round1-q3"><span>3</span></label>
+            <label><input type="radio" name="round1-q3" value="4" data-field="round1-q3"><span>4</span></label>
+            <label><input type="radio" name="round1-q3" value="5" data-field="round1-q3"><span>5</span></label>
+          </div>
+        </div>
+        <div class="feedback-row">
+          <span>الإجابات تضمنت أمثلة محددة وأرقام</span>
+          <div class="mini-circles">
+            <label><input type="radio" name="round1-q4" value="1" data-field="round1-q4"><span>1</span></label>
+            <label><input type="radio" name="round1-q4" value="2" data-field="round1-q4"><span>2</span></label>
+            <label><input type="radio" name="round1-q4" value="3" data-field="round1-q4"><span>3</span></label>
+            <label><input type="radio" name="round1-q4" value="4" data-field="round1-q4"><span>4</span></label>
+            <label><input type="radio" name="round1-q4" value="5" data-field="round1-q4"><span>5</span></label>
+          </div>
+        </div>
+        <div class="write-area">
+          <div class="write-label">نقطة قوة واحدة:</div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="round1-strength"></div>
+        </div>
+        <div class="write-area">
+          <div class="write-label">شيء واحد للتحسين:</div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="round1-improve"></div>
+        </div>
+      </div>
+
+      <div class="round-box">
+        <h4>الجولة 2 | أنا: ☐ المقابِل &nbsp; ☐ المرشح</h4>
+        <div class="write-area">
+          <div class="write-label">اسم الزميل:</div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="round2-partner"></div>
+        </div>
+        <div class="rating-scale">
+          <span>مقياس التقييم:</span>
+          <div class="scale-ends"><span>1 = ضعيف</span><span>5 = ممتاز</span></div>
+        </div>
+        <div class="feedback-row">
+          <span>إجابات واضحة ومنظمة (استخدم STAR)</span>
+          <div class="mini-circles">
+            <label><input type="radio" name="round2-q1" value="1" data-field="round2-q1"><span>1</span></label>
+            <label><input type="radio" name="round2-q1" value="2" data-field="round2-q1"><span>2</span></label>
+            <label><input type="radio" name="round2-q1" value="3" data-field="round2-q1"><span>3</span></label>
+            <label><input type="radio" name="round2-q1" value="4" data-field="round2-q1"><span>4</span></label>
+            <label><input type="radio" name="round2-q1" value="5" data-field="round2-q1"><span>5</span></label>
+          </div>
+        </div>
+        <div class="feedback-row">
+          <span>لغة جسد واثقة (تواصل بصري، وقفة)</span>
+          <div class="mini-circles">
+            <label><input type="radio" name="round2-q2" value="1" data-field="round2-q2"><span>1</span></label>
+            <label><input type="radio" name="round2-q2" value="2" data-field="round2-q2"><span>2</span></label>
+            <label><input type="radio" name="round2-q2" value="3" data-field="round2-q2"><span>3</span></label>
+            <label><input type="radio" name="round2-q2" value="4" data-field="round2-q2"><span>4</span></label>
+            <label><input type="radio" name="round2-q2" value="5" data-field="round2-q2"><span>5</span></label>
+          </div>
+        </div>
+        <div class="feedback-row">
+          <span>تحدث بسرعة مناسبة (لا سريع/بطيء جداً)</span>
+          <div class="mini-circles">
+            <label><input type="radio" name="round2-q3" value="1" data-field="round2-q3"><span>1</span></label>
+            <label><input type="radio" name="round2-q3" value="2" data-field="round2-q3"><span>2</span></label>
+            <label><input type="radio" name="round2-q3" value="3" data-field="round2-q3"><span>3</span></label>
+            <label><input type="radio" name="round2-q3" value="4" data-field="round2-q3"><span>4</span></label>
+            <label><input type="radio" name="round2-q3" value="5" data-field="round2-q3"><span>5</span></label>
+          </div>
+        </div>
+        <div class="feedback-row">
+          <span>الإجابات تضمنت أمثلة محددة وأرقام</span>
+          <div class="mini-circles">
+            <label><input type="radio" name="round2-q4" value="1" data-field="round2-q4"><span>1</span></label>
+            <label><input type="radio" name="round2-q4" value="2" data-field="round2-q4"><span>2</span></label>
+            <label><input type="radio" name="round2-q4" value="3" data-field="round2-q4"><span>3</span></label>
+            <label><input type="radio" name="round2-q4" value="4" data-field="round2-q4"><span>4</span></label>
+            <label><input type="radio" name="round2-q4" value="5" data-field="round2-q4"><span>5</span></label>
+          </div>
+        </div>
+        <div class="write-area">
+          <div class="write-label">نقطة قوة واحدة:</div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="round2-strength"></div>
+        </div>
+        <div class="write-area">
+          <div class="write-label">شيء واحد للتحسين:</div>
+          <div class="write-line"><input type="text" class="editable-input" data-field="round2-improve"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="peer-box">
+      <h3>تأملاتي بعد المقابلة التجريبية</h3>
+      <div class="write-area">
+        <div class="write-label">ايش كان طبيعي وسهل؟</div>
+        <div class="write-line"><input type="text" class="editable-input" data-field="reflection-easy"></div>
+      </div>
+      <div class="write-area">
+        <div class="write-label">ايش كان أصعب من المتوقع؟</div>
+        <div class="write-line"><input type="text" class="editable-input" data-field="reflection-hard"></div>
+      </div>
+      <div class="write-area">
+        <div class="write-label">شيء واحد رح أتدرب عليه قبل مقابلتي الحقيقية القادمة:</div>
+        <div class="write-line"><input type="text" class="editable-input" data-field="reflection-practice"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      منهج مهارات التوظيف &middot; برنامج الخريجين الجدد &middot; الجلسة 05: مهارات المقابلة
+      <br>
+      <button onclick="saveData()" style="margin-top: 12px; padding: 6px 16px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">💾 حفظ العمل</button>
+      <button onclick="downloadPDF()" style="margin-right: 8px; padding: 6px 16px; background: #2ec4b6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">📥 تحميل PDF</button>
+    </div>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        loadData();
+      });
+
+      document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('editable-input') || e.target.id.startsWith('student')) {
+          autoSave();
+        }
+      });
+
+      document.addEventListener('change', function(e) {
+        if (e.target.type === 'radio') {
+          autoSave();
+        }
+      });
+
+      function autoSave() {
+        const data = {};
+        data.studentName = document.getElementById('studentName').value;
+        data.studentTrack = document.getElementById('studentTrack').value;
+        
+        document.querySelectorAll('.editable-input').forEach(input => {
+          const field = input.getAttribute('data-field');
+          data[field] = input.value;
+        });
+        
+        document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+          data[radio.name] = radio.value;
+        });
+        
+        localStorage.setItem('mock_interview_data', JSON.stringify(data));
+      }
+
+      function saveData() {
+        autoSave();
+        alert('✅ تم حفظ عملك بنجاح!');
+      }
+
+      function loadData() {
+        const saved = localStorage.getItem('mock_interview_data');
+        if (saved) {
+          const data = JSON.parse(saved);
+          if (data.studentName) document.getElementById('studentName').value = data.studentName;
+          if (data.studentTrack) document.getElementById('studentTrack').value = data.studentTrack;
+          
+          document.querySelectorAll('.editable-input').forEach(input => {
+            const field = input.getAttribute('data-field');
+            if (data[field]) {
+              input.value = data[field];
+            }
+          });
+          
+          document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            if (data[radio.name] === radio.value) {
+              radio.checked = true;
+            }
+          });
+        }
+      }
+
+      function downloadPDF() {
+        window.print();
+      }
+    </script>
+  </body>
+</html>
