@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>تخطيط سبرنت الفريق</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", -apple-system, sans-serif;
+        color: #1b2a4a;
+        background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #ddd6fe 100%);
+        padding: 24px;
+        max-width: 860px;
+        margin: 0 auto;
+        direction: rtl;
+        text-align: right;
+        min-height: 100vh;
+      }
+
+      .sheet {
+        background: white;
+        padding: 28px;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(67, 56, 202, 0.1);
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 16px;
+        border-bottom: 3px solid #4338ca;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1b2a4a;
+      }
+      .header .session-tag {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: white;
+        background: #4338ca;
+        padding: 6px 14px;
+        border-radius: 4px;
+      }
+
+      .student-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .student-info .field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .student-info .field span {
+        color: #6c757d;
+        white-space: nowrap;
+      }
+      .student-info .field input {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #dee2e6;
+        background: transparent;
+        font-family: inherit;
+        font-size: inherit;
+        outline: none;
+        padding: 4px 6px;
+      }
+      .student-info .field input:focus {
+        background: #faf5ff;
+        border-bottom-color: #4338ca;
+      }
+
+      .instructions {
+        background: #eef2ff;
+        border-right: 3px solid #4338ca;
+        border-radius: 8px 0 0 8px;
+        padding: 12px 16px;
+        margin-bottom: 22px;
+        font-size: 13px;
+        line-height: 1.7;
+        color: #343a40;
+      }
+
+      .section {
+        margin-bottom: 24px;
+      }
+      .section-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1b2a4a;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #4338ca;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-num {
+        background: #4338ca;
+        color: white;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .write-area {
+        margin-top: 12px;
+      }
+      .write-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #6c757d;
+        margin-bottom: 6px;
+      }
+      .write-line {
+        border-bottom: 1px dotted #c7d2fe;
+        min-height: 30px;
+        padding: 4px 0;
+      }
+      .editable-input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 13px;
+        color: inherit;
+        outline: none;
+        padding: 2px 4px;
+      }
+      .editable-input:focus {
+        background: #faf5ff;
+        border-radius: 3px;
+      }
+      textarea.editable-input {
+        resize: vertical;
+        min-height: 70px;
+        line-height: 1.7;
+        border: 1.5px solid #c7d2fe;
+        border-radius: 6px;
+        padding: 10px 12px;
+        background: #fafbff;
+        font-size: 13px;
+      }
+      textarea.editable-input:focus {
+        background: #ffffff;
+        border-color: #4338ca;
+        box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1);
+      }
+
+      /* Roles grid */
+      .roles-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .role-chip {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: #1b2a4a;
+        padding: 8px 12px;
+        border: 1.5px solid #c7d2fe;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        user-select: none;
+      }
+      .role-chip:hover {
+        border-color: #4338ca;
+        background: #faf5ff;
+      }
+      .role-chip input {
+        accent-color: #4338ca;
+        cursor: pointer;
+      }
+      .role-chip.checked {
+        background: #eef2ff;
+        border-color: #4338ca;
+        font-weight: 600;
+      }
+      .role-chip .role-name { font-weight: 600; }
+      .role-chip .role-desc {
+        display: block;
+        font-size: 10px;
+        color: #6c757d;
+        margin-top: 2px;
+      }
+
+      /* Sprint table */
+      .sprint-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 12px;
+      }
+      .sprint-table th {
+        background: #4338ca;
+        color: white;
+        padding: 8px;
+        text-align: right;
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+      }
+      .sprint-table td {
+        padding: 0;
+        border-bottom: 1px solid #e0e7ff;
+        vertical-align: middle;
+      }
+      .sprint-table .week-header {
+        background: #eef2ff;
+        font-weight: 700;
+        color: #4338ca;
+        padding: 8px;
+        text-align: right;
+      }
+      .sprint-table input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 12px;
+        outline: none;
+        padding: 8px;
+        color: inherit;
+      }
+      .sprint-table input:focus { background: #faf5ff; }
+
+      /* Tools grid */
+      .tools-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .tool-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        padding: 8px 10px;
+        border: 1.5px solid #e0e7ff;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        user-select: none;
+      }
+      .tool-item:hover {
+        border-color: #4338ca;
+        background: #faf5ff;
+      }
+      .tool-item input { accent-color: #4338ca; cursor: pointer; }
+      .tool-item.checked {
+        background: #eef2ff;
+        border-color: #4338ca;
+        font-weight: 600;
+      }
+      .tool-other { grid-column: span 2; }
+      .tool-other input[type="text"] {
+        flex: 1;
+        border: none;
+        border-bottom: 1px dotted #c7d2fe;
+        background: transparent;
+        font-family: inherit;
+        font-size: 12px;
+        outline: none;
+        padding: 2px 4px;
+      }
+      .tool-other input[type="text"]:focus { background: #faf5ff; }
+
+      .reflection-box {
+        background: #faf5ff;
+        border: 1.5px solid #c7d2fe;
+        border-radius: 10px;
+        padding: 18px;
+        margin-top: 24px;
+      }
+      .reflection-box h3 {
+        font-size: 15px;
+        font-weight: 700;
+        color: #4338ca;
+        margin-bottom: 10px;
+      }
+
+      .actions {
+        margin-top: 28px;
+        padding-top: 16px;
+        border-top: 1px solid #e0e7ff;
+        text-align: center;
+      }
+      .actions button {
+        margin: 0 4px;
+        padding: 8px 18px;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        transition: transform 0.15s ease;
+      }
+      .actions button:hover { transform: translateY(-1px); }
+      .btn-save { background: #4338ca; }
+      .btn-pdf { background: #6366f1; }
+      .btn-clear { background: #94a3b8; }
+
+      .footer {
+        margin-top: 18px;
+        font-size: 11px;
+        color: #6c757d;
+        text-align: center;
+      }
+
+      .save-status {
+        display: inline-block;
+        margin-right: 10px;
+        font-size: 11px;
+        color: #16a34a;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .save-status.show { opacity: 1; }
+
+      @media print {
+        body {
+          background: white;
+          padding: 0;
+        }
+        .sheet { box-shadow: none; padding: 0; }
+        .actions { display: none; }
+      }
+
+      @media (max-width: 600px) {
+        .roles-grid, .tools-grid { grid-template-columns: 1fr; }
+        .student-info { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sheet">
+      <div class="header">
+        <h1>تخطيط سبرنت الفريق</h1>
+        <div class="session-tag">الجلسة 07</div>
+      </div>
+
+      <div class="student-info">
+        <div class="field">
+          <span>الاسم:</span>
+          <input type="text" id="studentName" placeholder="اكتب اسمك" />
+        </div>
+        <div class="field">
+          <span>التخصص:</span>
+          <input type="text" id="studentTrack" placeholder="مثال: تطوير برمجيات" />
+        </div>
+      </div>
+
+      <div class="instructions">
+        <strong>التعليمات:</strong>
+        إنتو فريق رح يخطط سبرنت لأسبوعين. حددوا المشروع، اختاروا الأدوار،
+        قسّموا المهام بين الأسبوع الأول والثاني، واختاروا الأدوات المجانية اللي
+        رح تستخدموها. كل شي رح يتعبى أونلاين بهالنموذج، وعملكم بيتحفظ تلقائياً
+        بالمتصفح. بآخر النشاط، شخص واحد من الفريق رح يشير الشاشة ويعرض الخطة
+        بدقيقتين.
+      </div>
+
+      <!-- Section 1: Team & Roles -->
+      <div class="section">
+        <div class="section-title">
+          <span class="section-num">1</span> الفريق والأدوار
+        </div>
+        <div class="write-area">
+          <div class="write-label">أعضاء الفريق (الأسماء):</div>
+          <div class="write-line">
+            <input type="text" class="editable-input" data-field="team-members-1" placeholder="عضو 1" />
+          </div>
+          <div class="write-line">
+            <input type="text" class="editable-input" data-field="team-members-2" placeholder="عضو 2" />
+          </div>
+          <div class="write-line">
+            <input type="text" class="editable-input" data-field="team-members-3" placeholder="عضو 3" />
+          </div>
+          <div class="write-line">
+            <input type="text" class="editable-input" data-field="team-members-4" placeholder="عضو 4" />
+          </div>
+          <div class="write-line">
+            <input type="text" class="editable-input" data-field="team-members-5" placeholder="عضو 5 (اختياري)" />
+          </div>
+        </div>
+        <div class="write-area">
+          <div class="write-label">اختاروا الأدوار اللي رح يلعبها كل عضو (ممكن أكثر من دور لكل شخص):</div>
+          <div class="roles-grid">
+            <label class="role-chip">
+              <input type="checkbox" data-field="role-initiator" />
+              <span>
+                <span class="role-name">المبادر</span>
+                <span class="role-desc">بيجيب الأفكار والطاقة</span>
+              </span>
+            </label>
+            <label class="role-chip">
+              <input type="checkbox" data-field="role-planner" />
+              <span>
+                <span class="role-name">المخطط</span>
+                <span class="role-desc">بينظم المهام والمواعيد</span>
+              </span>
+            </label>
+            <label class="role-chip">
+              <input type="checkbox" data-field="role-implementer" />
+              <span>
+                <span class="role-name">المنفذ</span>
+                <span class="role-desc">بيخلص الشغل بثبات</span>
+              </span>
+            </label>
+            <label class="role-chip">
+              <input type="checkbox" data-field="role-critic" />
+              <span>
+                <span class="role-name">الناقد</span>
+                <span class="role-desc">بيلاقي الثغرات بدري</span>
+              </span>
+            </label>
+            <label class="role-chip">
+              <input type="checkbox" data-field="role-connector" />
+              <span>
+                <span class="role-name">الموصّل</span>
+                <span class="role-desc">بيربط بين الأعضاء</span>
+              </span>
+            </label>
+            <label class="role-chip">
+              <input type="checkbox" data-field="role-finisher" />
+              <span>
+                <span class="role-name">المُنهي</span>
+                <span class="role-desc">بيدقق قبل التسليم</span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="write-area">
+          <div class="write-label">مين الميسّر (بيدير اللقاء)؟ ومين الكاتب (بيكتب بالـ Google Doc)؟</div>
+          <div class="write-line">
+            <input type="text" class="editable-input" data-field="facilitator-scribe" placeholder="مثال: ميسّر: أحمد - كاتب: سارة" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Project Brief -->
+      <div class="section">
+        <div class="section-title">
+          <span class="section-num">2</span> ملخص المشروع
+        </div>
+        <div class="write-area">
+          <div class="write-label">اسم المشروع:</div>
+          <div class="write-line">
+            <input type="text" class="editable-input" data-field="project-name" placeholder="مثال: حملة إطلاق منتج جديد" />
+          </div>
+        </div>
+        <div class="write-area">
+          <div class="write-label">إيش المشروع وإيش الهدف منه؟ (جملتين بس)</div>
+          <textarea class="editable-input" data-field="project-brief" placeholder="اكتبوا ملخص قصير وواضح..."></textarea>
+        </div>
+      </div>
+
+      <!-- Section 3: Sprint Plan -->
+      <div class="section">
+        <div class="section-title">
+          <span class="section-num">3</span> خطة السبرنت لأسبوعين
+        </div>
+        <table class="sprint-table">
+          <tr>
+            <th style="width: 45%;">المهمة</th>
+            <th style="width: 25%;">المسؤول</th>
+            <th style="width: 30%;">الموعد النهائي</th>
+          </tr>
+          <tr><td colspan="3" class="week-header">الأسبوع الأول</td></tr>
+          <tr>
+            <td><input type="text" data-field="w1-task-1" placeholder="مهمة..." /></td>
+            <td><input type="text" data-field="w1-owner-1" placeholder="الاسم" /></td>
+            <td><input type="text" data-field="w1-due-1" placeholder="مثال: الأحد" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" data-field="w1-task-2" placeholder="مهمة..." /></td>
+            <td><input type="text" data-field="w1-owner-2" placeholder="الاسم" /></td>
+            <td><input type="text" data-field="w1-due-2" placeholder="مثال: الثلاثاء" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" data-field="w1-task-3" placeholder="مهمة..." /></td>
+            <td><input type="text" data-field="w1-owner-3" placeholder="الاسم" /></td>
+            <td><input type="text" data-field="w1-due-3" placeholder="مثال: الخميس" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" data-field="w1-task-4" placeholder="مهمة..." /></td>
+            <td><input type="text" data-field="w1-owner-4" placeholder="الاسم" /></td>
+            <td><input type="text" data-field="w1-due-4" placeholder="مثال: الجمعة" /></td>
+          </tr>
+          <tr><td colspan="3" class="week-header">الأسبوع الثاني</td></tr>
+          <tr>
+            <td><input type="text" data-field="w2-task-1" placeholder="مهمة..." /></td>
+            <td><input type="text" data-field="w2-owner-1" placeholder="الاسم" /></td>
+            <td><input type="text" data-field="w2-due-1" placeholder="مثال: الأحد" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" data-field="w2-task-2" placeholder="مهمة..." /></td>
+            <td><input type="text" data-field="w2-owner-2" placeholder="الاسم" /></td>
+            <td><input type="text" data-field="w2-due-2" placeholder="مثال: الثلاثاء" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" data-field="w2-task-3" placeholder="مهمة..." /></td>
+            <td><input type="text" data-field="w2-owner-3" placeholder="الاسم" /></td>
+            <td><input type="text" data-field="w2-due-3" placeholder="مثال: الخميس" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" data-field="w2-task-4" placeholder="مهمة..." /></td>
+            <td><input type="text" data-field="w2-owner-4" placeholder="الاسم" /></td>
+            <td><input type="text" data-field="w2-due-4" placeholder="مثال: الجمعة" /></td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Section 4: Tools -->
+      <div class="section">
+        <div class="section-title">
+          <span class="section-num">4</span> الأدوات المجانية اللي رح نستخدمها
+        </div>
+        <div class="tools-grid">
+          <label class="tool-item">
+            <input type="checkbox" data-field="tool-trello" />
+            <span>Trello: لوحة مهام مجانية</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="tool-github" />
+            <span>GitHub Projects: للسبرنتات والكود</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="tool-notion" />
+            <span>Notion: توثيق وملاحظات</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="tool-figma" />
+            <span>Figma / FigJam: تصميم وعصف ذهني</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="tool-google" />
+            <span>Google Workspace: Docs و Sheets</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="tool-canva" />
+            <span>Canva: تصاميم سوشيال</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="tool-discord" />
+            <span>Discord أو Slack: تواصل الفريق</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="tool-whatsapp" />
+            <span>WhatsApp: تواصل سريع</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="tool-meta" />
+            <span>Meta Business Suite: جدولة بوستات</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="tool-firebase" />
+            <span>Firebase Free Tier: خادم خلفي</span>
+          </label>
+          <label class="tool-item tool-other">
+            <input type="checkbox" data-field="tool-other-check" />
+            <span>أداة ثانية:</span>
+            <input type="text" data-field="tool-other-text" placeholder="اكتب اسم الأداة..." />
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 5: Reflection -->
+      <div class="reflection-box">
+        <h3>تأمل الفريق بعد التخطيط</h3>
+        <div class="write-area">
+          <div class="write-label">أصعب جزء واجهتوه بالتخطيط مع بعض كان إيش؟</div>
+          <textarea class="editable-input" data-field="reflect-hardest"></textarea>
+        </div>
+        <div class="write-area">
+          <div class="write-label">هل دورك حسيته طبيعي؟ ليش أو ليش لأ؟</div>
+          <textarea class="editable-input" data-field="reflect-role"></textarea>
+        </div>
+        <div class="write-area">
+          <div class="write-label">إيش الشي اللي فريقكم رح يعمله مختلف لو كان السبرنت حقيقي؟</div>
+          <textarea class="editable-input" data-field="reflect-different"></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-save" onclick="saveData()">💾 حفظ العمل</button>
+        <button class="btn-pdf" onclick="downloadPDF()">📥 تحميل PDF</button>
+        <button class="btn-clear" onclick="clearData()">🗑️ مسح الكل</button>
+        <span id="saveStatus" class="save-status">✓ تم الحفظ تلقائياً</span>
+      </div>
+
+      <div class="footer">
+        منهج مهارات التوظيف &middot; برنامج الخريجين الجدد &middot; الجلسة 07: العمل الجماعي والتعاون
+      </div>
+    </div>
+
+    <script>
+      const STORAGE_KEY = "sprint_planning_data";
+
+      window.addEventListener("DOMContentLoaded", function () {
+        loadData();
+        attachListeners();
+      });
+
+      function attachListeners() {
+        document.querySelectorAll("input, textarea").forEach((el) => {
+          el.addEventListener("input", autoSave);
+          el.addEventListener("change", autoSave);
+        });
+
+        document.querySelectorAll(".role-chip input, .tool-item input[type='checkbox']").forEach((cb) => {
+          cb.addEventListener("change", function () {
+            this.closest(".role-chip, .tool-item").classList.toggle("checked", this.checked);
+          });
+        });
+      }
+
+      function autoSave() {
+        const data = {};
+        data.studentName = document.getElementById("studentName").value;
+        data.studentTrack = document.getElementById("studentTrack").value;
+
+        document.querySelectorAll("[data-field]").forEach((el) => {
+          const field = el.getAttribute("data-field");
+          if (el.type === "checkbox") {
+            data[field] = el.checked;
+          } else {
+            data[field] = el.value;
+          }
+        });
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        showSaveStatus();
+      }
+
+      function showSaveStatus() {
+        const status = document.getElementById("saveStatus");
+        status.classList.add("show");
+        clearTimeout(window._saveTimer);
+        window._saveTimer = setTimeout(() => status.classList.remove("show"), 1500);
+      }
+
+      function saveData() {
+        autoSave();
+        alert("✅ تم حفظ عملك بنجاح!");
+      }
+
+      function loadData() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const data = JSON.parse(saved);
+
+        if (data.studentName) document.getElementById("studentName").value = data.studentName;
+        if (data.studentTrack) document.getElementById("studentTrack").value = data.studentTrack;
+
+        document.querySelectorAll("[data-field]").forEach((el) => {
+          const field = el.getAttribute("data-field");
+          if (data[field] === undefined) return;
+          if (el.type === "checkbox") {
+            el.checked = !!data[field];
+            el.closest(".role-chip, .tool-item")?.classList.toggle("checked", el.checked);
+          } else {
+            el.value = data[field];
+          }
+        });
+      }
+
+      function clearData() {
+        if (!confirm("هل متأكد إنك بدك تمسح كل البيانات؟")) return;
+        localStorage.removeItem(STORAGE_KEY);
+        document.querySelectorAll("input, textarea").forEach((el) => {
+          if (el.type === "checkbox") {
+            el.checked = false;
+            el.closest(".role-chip, .tool-item")?.classList.remove("checked");
+          } else {
+            el.value = "";
+          }
+        });
+      }
+
+      function downloadPDF() {
+        window.print();
+      }
+    </script>
+  </body>
+</html>
