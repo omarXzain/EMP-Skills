@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>دراسة حالة - حل المشاكل</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", -apple-system, sans-serif;
+        color: #1b2a4a;
+        background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 50%, #ddd6fe 100%);
+        padding: 24px;
+        max-width: 860px;
+        margin: 0 auto;
+        direction: rtl;
+        text-align: right;
+        min-height: 100vh;
+      }
+
+      .sheet {
+        background: white;
+        padding: 28px;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(124, 58, 237, 0.1);
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 16px;
+        border-bottom: 3px solid #7c3aed;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1b2a4a;
+      }
+      .header .session-tag {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: white;
+        background: #7c3aed;
+        padding: 6px 14px;
+        border-radius: 4px;
+      }
+
+      .student-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .student-info .field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .student-info .field span {
+        color: #6c757d;
+        white-space: nowrap;
+      }
+      .student-info .field input {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #dee2e6;
+        background: transparent;
+        font-family: inherit;
+        font-size: inherit;
+        outline: none;
+        padding: 4px 6px;
+      }
+      .student-info .field input:focus {
+        background: #faf5ff;
+        border-bottom-color: #7c3aed;
+      }
+
+      .instructions {
+        background: #f5f3ff;
+        border-right: 3px solid #7c3aed;
+        border-radius: 8px 0 0 8px;
+        padding: 12px 16px;
+        margin-bottom: 22px;
+        font-size: 13px;
+        line-height: 1.7;
+        color: #343a40;
+      }
+
+      .section {
+        margin-bottom: 20px;
+      }
+      .section-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1b2a4a;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #7c3aed;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-num {
+        background: #7c3aed;
+        color: white;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .write-area { margin-top: 12px; }
+      .write-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #6c757d;
+        margin-bottom: 6px;
+      }
+      .editable-input {
+        width: 100%;
+        border: none;
+        border-bottom: 1px dotted #c7d2fe;
+        background: transparent;
+        font-family: inherit;
+        font-size: 13px;
+        color: inherit;
+        outline: none;
+        padding: 6px 4px;
+      }
+      .editable-input:focus {
+        background: #faf5ff;
+        border-bottom-color: #7c3aed;
+      }
+      textarea.editable-input {
+        resize: vertical;
+        min-height: 70px;
+        line-height: 1.7;
+        border: 1.5px solid #c7d2fe;
+        border-radius: 6px;
+        padding: 10px 12px;
+        background: #fafbff;
+        font-size: 13px;
+      }
+      textarea.editable-input:focus {
+        background: #ffffff;
+        border-color: #7c3aed;
+        box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+      }
+
+      /* Track selector */
+      .track-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .track-chip {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        padding: 10px 12px;
+        border: 1.5px solid #e0e7ff;
+        border-radius: 8px;
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.2s ease;
+      }
+      .track-chip:hover { border-color: #7c3aed; background: #faf5ff; }
+      .track-chip input { accent-color: #7c3aed; cursor: pointer; }
+      .track-chip.checked {
+        background: #f5f3ff;
+        border-color: #7c3aed;
+        font-weight: 600;
+      }
+
+      /* Step sections */
+      .step-section {
+        margin-bottom: 16px;
+        padding: 14px 16px;
+        border-radius: 10px;
+        background: #faf5ff;
+        border-right: 4px solid #7c3aed;
+      }
+      .step-section.s2 { border-right-color: #0891b2; background: #ecfeff; }
+      .step-section.s3 { border-right-color: #d97706; background: #fffbeb; }
+      .step-section.s4 { border-right-color: #059669; background: #ecfdf5; }
+      .step-section.s5 { border-right-color: #e11d48; background: #fff1f2; }
+
+      .step-label {
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #7c3aed;
+      }
+      .step-section.s2 .step-label { color: #0891b2; }
+      .step-section.s3 .step-label { color: #d97706; }
+      .step-section.s4 .step-label { color: #059669; }
+      .step-section.s5 .step-label { color: #e11d48; }
+
+      /* 5 Whys chain */
+      .whys-grid {
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        gap: 6px 10px;
+        margin-top: 6px;
+        align-items: center;
+      }
+      .why-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: #7c3aed;
+      }
+
+      /* 2x2 matrix */
+      .matrix-box {
+        display: grid;
+        grid-template-columns: 70px 1fr 1fr;
+        grid-template-rows: auto 1fr 1fr;
+        gap: 4px;
+        margin-top: 8px;
+        font-size: 11px;
+      }
+      .matrix-box .m-corner { }
+      .matrix-box .m-header {
+        text-align: center;
+        font-weight: 700;
+        color: #059669;
+        padding: 6px;
+        font-size: 12px;
+      }
+      .matrix-box .m-side {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        text-align: center;
+        font-weight: 700;
+        color: #059669;
+        padding: 6px;
+        font-size: 12px;
+      }
+      .matrix-box .m-cell {
+        border: 1.5px solid #d1fae5;
+        border-radius: 6px;
+        min-height: 70px;
+        padding: 6px;
+      }
+      .matrix-box .m-cell textarea {
+        width: 100%;
+        height: 100%;
+        min-height: 56px;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 11px;
+        color: inherit;
+        outline: none;
+        resize: none;
+      }
+      .matrix-box .m-cell textarea:focus { background: rgba(255,255,255,0.5); }
+      .matrix-box .m-cell.top-left { background: #ecfdf5; }
+      .matrix-box .m-cell.top-right { background: #fffbeb; }
+      .matrix-box .m-cell.bottom-left { background: #f0f9ff; }
+      .matrix-box .m-cell.bottom-right { background: #fef2f2; }
+
+      /* Reflection */
+      .reflection-box {
+        background: #f5f3ff;
+        border: 1.5px solid #c7d2fe;
+        border-radius: 10px;
+        padding: 18px;
+        margin-top: 24px;
+      }
+      .reflection-box h3 {
+        font-size: 15px;
+        font-weight: 700;
+        color: #7c3aed;
+        margin-bottom: 10px;
+      }
+
+      .actions {
+        margin-top: 28px;
+        padding-top: 16px;
+        border-top: 1px solid #e0e7ff;
+        text-align: center;
+      }
+      .actions button {
+        margin: 0 4px;
+        padding: 8px 18px;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        transition: transform 0.15s ease;
+      }
+      .actions button:hover { transform: translateY(-1px); }
+      .btn-save { background: #7c3aed; }
+      .btn-pdf { background: #a855f7; }
+      .btn-clear { background: #94a3b8; }
+
+      .footer {
+        margin-top: 18px;
+        font-size: 11px;
+        color: #6c757d;
+        text-align: center;
+      }
+
+      .save-status {
+        display: inline-block;
+        margin-right: 10px;
+        font-size: 11px;
+        color: #16a34a;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .save-status.show { opacity: 1; }
+
+      @media print {
+        body { background: white; padding: 0; }
+        .sheet { box-shadow: none; padding: 0; }
+        .actions { display: none; }
+      }
+
+      @media (max-width: 600px) {
+        .track-grid { grid-template-columns: 1fr; }
+        .student-info { grid-template-columns: 1fr; }
+        .matrix-box {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+        }
+        .matrix-box .m-side { writing-mode: horizontal-tb; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sheet">
+      <div class="header">
+        <h1>دراسة حالة - حل المشاكل</h1>
+        <div class="session-tag">الجلسة 08</div>
+      </div>
+
+      <div class="student-info">
+        <div class="field">
+          <span>الاسم:</span>
+          <input type="text" id="studentName" placeholder="اكتب اسمك" />
+        </div>
+        <div class="field">
+          <span>التخصص:</span>
+          <input type="text" id="studentTrack" placeholder="مثال: تطوير برمجيات" />
+        </div>
+      </div>
+
+      <div class="instructions">
+        <strong>التعليمات:</strong>
+        مع فريقك، استخدم إطار الـ 5 خطوات لحل دراسة الحالة الخاصة بتخصصكم. وزّعوا
+        الأدوار: ميسّر بيدير النقاش، كاتب بيكتب بالـ Google Doc، ومقدّم بيعرض
+        النتائج. كل شي رح يتعبى أونلاين هون، وعملكم بيتحفظ تلقائياً. بآخر النشاط
+        رح تشيروا الشاشة وتعرضوا الحل بـ 3 دقائق.
+      </div>
+
+      <!-- Section 0: Team & Case -->
+      <div class="section">
+        <div class="section-title">
+          <span class="section-num">0</span> الفريق والسيناريو
+        </div>
+        <div class="write-area">
+          <div class="write-label">أعضاء الفريق وأدوارهم (ميسّر / كاتب / مقدّم):</div>
+          <input type="text" class="editable-input" data-field="team-roles-1" placeholder="مثال: أحمد - ميسّر" />
+          <input type="text" class="editable-input" data-field="team-roles-2" placeholder="عضو 2" />
+          <input type="text" class="editable-input" data-field="team-roles-3" placeholder="عضو 3" />
+          <input type="text" class="editable-input" data-field="team-roles-4" placeholder="عضو 4" />
+        </div>
+        <div class="write-area">
+          <div class="write-label">اختاروا تخصصكم (دراسة الحالة):</div>
+          <div class="track-grid">
+            <label class="track-chip">
+              <input type="radio" name="track" data-field="track-marketing" />
+              <span><strong>تسويق رقمي:</strong> تفاعل إنستغرام نزل 60٪</span>
+            </label>
+            <label class="track-chip">
+              <input type="radio" name="track" data-field="track-software" />
+              <span><strong>تطوير برمجيات:</strong> تطبيق ويب بيقع مع 100+ مستخدم</span>
+            </label>
+            <label class="track-chip">
+              <input type="radio" name="track" data-field="track-mobile" />
+              <span><strong>تطبيقات موبايل:</strong> تقييم نجمة بسبب البطارية</span>
+            </label>
+            <label class="track-chip">
+              <input type="radio" name="track" data-field="track-design" />
+              <span><strong>تصميم جرافيكي:</strong> عميل رفض الشعار بعد 3 تعديلات</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step-section">
+        <div class="step-label">الخطوة 1: حدد المشكلة</div>
+        <div class="write-area">
+          <div class="write-label">إيش بالظبط المشكلة؟ (كون محدد، مش "في مشكلة")</div>
+          <input type="text" class="editable-input" data-field="s1-problem" />
+        </div>
+        <div class="write-area">
+          <div class="write-label">مين تأثر فيها؟</div>
+          <input type="text" class="editable-input" data-field="s1-affected" />
+        </div>
+        <div class="write-area">
+          <div class="write-label">تقنية الـ 5 ليش (احفروا للسبب الجذري):</div>
+          <div class="whys-grid">
+            <span class="why-label">ليش 1:</span>
+            <input type="text" class="editable-input" data-field="why-1" />
+            <span class="why-label">ليش 2:</span>
+            <input type="text" class="editable-input" data-field="why-2" />
+            <span class="why-label">ليش 3:</span>
+            <input type="text" class="editable-input" data-field="why-3" />
+            <span class="why-label">ليش 4:</span>
+            <input type="text" class="editable-input" data-field="why-4" />
+            <span class="why-label">ليش 5:</span>
+            <input type="text" class="editable-input" data-field="why-5" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-section s2">
+        <div class="step-label">الخطوة 2: اجمع المعلومات</div>
+        <div class="write-area">
+          <div class="write-label">إيش البيانات اللي بتحتاجوها؟ ومين رح تسألوا؟</div>
+          <textarea class="editable-input" data-field="s2-data"></textarea>
+        </div>
+        <div class="write-area">
+          <div class="write-label">إيش اللي تعرفونه كحقيقة؟ وإيش اللي بس بتفترضوه؟</div>
+          <textarea class="editable-input" data-field="s2-facts"></textarea>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-section s3">
+        <div class="step-label">الخطوة 3: ولّد حلول (عصف ذهني، ممنوع الحكم!)</div>
+        <div class="write-area">
+          <div class="write-label">اكتبوا كل الأفكار (5 أفكار على الأقل):</div>
+          <input type="text" class="editable-input" data-field="s3-idea-1" placeholder="فكرة 1" />
+          <input type="text" class="editable-input" data-field="s3-idea-2" placeholder="فكرة 2" />
+          <input type="text" class="editable-input" data-field="s3-idea-3" placeholder="فكرة 3" />
+          <input type="text" class="editable-input" data-field="s3-idea-4" placeholder="فكرة 4" />
+          <input type="text" class="editable-input" data-field="s3-idea-5" placeholder="فكرة 5" />
+          <input type="text" class="editable-input" data-field="s3-idea-6" placeholder="فكرة 6 (اختياري)" />
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-section s4">
+        <div class="step-label">الخطوة 4: قيّم وقرر (مصفوفة 2×2)</div>
+        <div class="write-area">
+          <div class="write-label">حطوا أفضل الحلول بالخانات (تأثير × جهد):</div>
+          <div class="matrix-box">
+            <div class="m-corner"></div>
+            <div class="m-header">جهد قليل</div>
+            <div class="m-header">جهد كبير</div>
+
+            <div class="m-side">تأثير عالي</div>
+            <div class="m-cell top-left">
+              <textarea data-field="m-top-left" placeholder="نفّذ أولاً ↑"></textarea>
+            </div>
+            <div class="m-cell top-right">
+              <textarea data-field="m-top-right" placeholder="خطّط بعناية"></textarea>
+            </div>
+
+            <div class="m-side">تأثير قليل</div>
+            <div class="m-cell bottom-left">
+              <textarea data-field="m-bottom-left" placeholder="مكاسب سريعة"></textarea>
+            </div>
+            <div class="m-cell bottom-right">
+              <textarea data-field="m-bottom-right" placeholder="تجاهل ✕"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="write-area">
+          <div class="write-label">الحل اللي اخترناه وليش:</div>
+          <textarea class="editable-input" data-field="s4-chosen"></textarea>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="step-section s5">
+        <div class="step-label">الخطوة 5: نفّذ وراجع</div>
+        <div class="write-area">
+          <div class="write-label">كيف رح تنفذوا؟ (الخطوات الرئيسية)</div>
+          <textarea class="editable-input" data-field="s5-implement"></textarea>
+        </div>
+        <div class="write-area">
+          <div class="write-label">كيف رح تقيسوا النجاح؟ (المقاييس)</div>
+          <textarea class="editable-input" data-field="s5-metrics"></textarea>
+        </div>
+      </div>
+
+      <!-- Reflection -->
+      <div class="reflection-box">
+        <h3>تأمل الفريق</h3>
+        <div class="write-area">
+          <div class="write-label">هل قفزنا للحل بسرعة؟ إيش تعلمنا من هاي العملية؟</div>
+          <textarea class="editable-input" data-field="reflect-1"></textarea>
+        </div>
+        <div class="write-area">
+          <div class="write-label">هل صار "تفكير جماعي" (الكل وافق على طول)؟ مين لعب دور الناقد؟</div>
+          <textarea class="editable-input" data-field="reflect-2"></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-save" onclick="saveData()">💾 حفظ العمل</button>
+        <button class="btn-pdf" onclick="downloadPDF()">📥 تحميل PDF</button>
+        <button class="btn-clear" onclick="clearData()">🗑️ مسح الكل</button>
+        <span id="saveStatus" class="save-status">✓ تم الحفظ تلقائياً</span>
+      </div>
+
+      <div class="footer">
+        منهج مهارات التوظيف &middot; برنامج الخريجين الجدد &middot; الجلسة 08: حل المشاكل والتفكير النقدي
+      </div>
+    </div>
+
+    <script>
+      const STORAGE_KEY = "case_study_data";
+
+      window.addEventListener("DOMContentLoaded", function () {
+        loadData();
+        attachListeners();
+      });
+
+      function attachListeners() {
+        document.querySelectorAll("input, textarea").forEach((el) => {
+          el.addEventListener("input", autoSave);
+          el.addEventListener("change", autoSave);
+        });
+
+        document.querySelectorAll(".track-chip input").forEach((cb) => {
+          cb.addEventListener("change", function () {
+            document.querySelectorAll(".track-chip").forEach((c) => c.classList.remove("checked"));
+            if (this.checked) this.closest(".track-chip").classList.add("checked");
+          });
+        });
+      }
+
+      function autoSave() {
+        const data = {};
+        data.studentName = document.getElementById("studentName").value;
+        data.studentTrack = document.getElementById("studentTrack").value;
+
+        document.querySelectorAll("[data-field]").forEach((el) => {
+          const field = el.getAttribute("data-field");
+          if (el.type === "checkbox" || el.type === "radio") {
+            data[field] = el.checked;
+          } else {
+            data[field] = el.value;
+          }
+        });
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        showSaveStatus();
+      }
+
+      function showSaveStatus() {
+        const status = document.getElementById("saveStatus");
+        status.classList.add("show");
+        clearTimeout(window._saveTimer);
+        window._saveTimer = setTimeout(() => status.classList.remove("show"), 1500);
+      }
+
+      function saveData() {
+        autoSave();
+        alert("✅ تم حفظ عملك بنجاح!");
+      }
+
+      function loadData() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const data = JSON.parse(saved);
+
+        if (data.studentName) document.getElementById("studentName").value = data.studentName;
+        if (data.studentTrack) document.getElementById("studentTrack").value = data.studentTrack;
+
+        document.querySelectorAll("[data-field]").forEach((el) => {
+          const field = el.getAttribute("data-field");
+          if (data[field] === undefined) return;
+          if (el.type === "checkbox" || el.type === "radio") {
+            el.checked = !!data[field];
+            if (el.checked) el.closest(".track-chip")?.classList.add("checked");
+          } else {
+            el.value = data[field];
+          }
+        });
+      }
+
+      function clearData() {
+        if (!confirm("هل متأكد إنك بدك تمسح كل البيانات؟")) return;
+        localStorage.removeItem(STORAGE_KEY);
+        document.querySelectorAll("input, textarea").forEach((el) => {
+          if (el.type === "checkbox" || el.type === "radio") {
+            el.checked = false;
+          } else {
+            el.value = "";
+          }
+        });
+        document.querySelectorAll(".track-chip").forEach((c) => c.classList.remove("checked"));
+      }
+
+      function downloadPDF() {
+        window.print();
+      }
+    </script>
+  </body>
+</html>
