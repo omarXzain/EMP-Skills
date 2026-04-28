@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>الأدوات الرقمية والإنتاجية</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", -apple-system, sans-serif;
+        color: #1b2a4a;
+        background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%);
+        padding: 24px;
+        max-width: 860px;
+        margin: 0 auto;
+        direction: rtl;
+        text-align: right;
+        min-height: 100vh;
+      }
+
+      .sheet {
+        background: white;
+        padding: 28px;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(5, 150, 105, 0.1);
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 16px;
+        border-bottom: 3px solid #059669;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1b2a4a;
+      }
+      .header .session-tag {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: white;
+        background: #059669;
+        padding: 6px 14px;
+        border-radius: 4px;
+      }
+
+      .student-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .student-info .field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .student-info .field span {
+        color: #6c757d;
+        white-space: nowrap;
+      }
+      .student-info .field input {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #dee2e6;
+        background: transparent;
+        font-family: inherit;
+        font-size: inherit;
+        outline: none;
+        padding: 4px 6px;
+      }
+      .student-info .field input:focus {
+        background: #f0fdf4;
+        border-bottom-color: #059669;
+      }
+
+      .instructions {
+        background: #ecfdf5;
+        border-right: 3px solid #059669;
+        border-radius: 8px 0 0 8px;
+        padding: 12px 16px;
+        margin-bottom: 22px;
+        font-size: 13px;
+        line-height: 1.7;
+        color: #343a40;
+      }
+
+      .section {
+        margin-bottom: 22px;
+      }
+      .section-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1b2a4a;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #059669;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-num {
+        background: #059669;
+        color: white;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      .section-num.b { background: #2563eb; }
+      .section-title.b { border-bottom-color: #2563eb; }
+      .section-num.c { background: #f4a623; }
+      .section-title.c { border-bottom-color: #f4a623; }
+
+      .write-area { margin-top: 12px; }
+      .write-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #6c757d;
+        margin-bottom: 6px;
+      }
+      .editable-input {
+        width: 100%;
+        border: none;
+        border-bottom: 1px dotted #a7f3d0;
+        background: transparent;
+        font-family: inherit;
+        font-size: 13px;
+        color: inherit;
+        outline: none;
+        padding: 6px 4px;
+      }
+      .editable-input:focus {
+        background: #f0fdf4;
+        border-bottom-color: #059669;
+      }
+      textarea.editable-input {
+        resize: vertical;
+        min-height: 70px;
+        line-height: 1.7;
+        border: 1.5px solid #a7f3d0;
+        border-radius: 6px;
+        padding: 10px 12px;
+        background: #f7fdf9;
+        font-size: 13px;
+      }
+      textarea.editable-input:focus {
+        background: #ffffff;
+        border-color: #059669;
+        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+      }
+
+      /* Notion guide steps */
+      .notion-step {
+        display: flex;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid #d1fae5;
+        align-items: flex-start;
+      }
+      .notion-step:last-child { border-bottom: none; }
+      .notion-num {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #059669;
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .ns-content { flex: 1; }
+      .ns-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #1b2a4a;
+        margin-bottom: 4px;
+      }
+      .ns-desc {
+        font-size: 12px;
+        color: #6c757d;
+        line-height: 1.5;
+      }
+
+      /* AI Tools grid */
+      .tools-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .tool-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        padding: 8px 10px;
+        border: 1.5px solid #d1fae5;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        user-select: none;
+      }
+      .tool-item:hover { border-color: #2563eb; background: #f0fdf4; }
+      .tool-item input { accent-color: #2563eb; cursor: pointer; }
+      .tool-item.checked {
+        background: #eff6ff;
+        border-color: #2563eb;
+        font-weight: 600;
+      }
+      .tool-other { grid-column: span 2; }
+      .tool-other input[type="text"] {
+        flex: 1;
+        border: none;
+        border-bottom: 1px dotted #93c5fd;
+        background: transparent;
+        font-family: inherit;
+        font-size: 12px;
+        outline: none;
+        padding: 2px 4px;
+      }
+
+      /* Learning tracker */
+      .learn-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 12px;
+      }
+      .learn-table th {
+        background: #f4a623;
+        color: white;
+        padding: 8px;
+        text-align: right;
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+      }
+      .learn-table td {
+        padding: 0;
+        border-bottom: 1px solid #fef3c7;
+      }
+      .learn-table input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 12px;
+        outline: none;
+        padding: 8px;
+        color: inherit;
+      }
+      .learn-table input:focus { background: #fffbeb; }
+
+      /* Commitment card */
+      .commit-card {
+        background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+        border: 2px solid #059669;
+        border-radius: 12px;
+        padding: 22px;
+        margin-top: 24px;
+        text-align: center;
+      }
+      .commit-card h3 {
+        font-size: 17px;
+        font-weight: 700;
+        color: #059669;
+        margin-bottom: 10px;
+      }
+      .commit-card p {
+        font-size: 13px;
+        color: #1b2a4a;
+        margin-bottom: 16px;
+        line-height: 1.6;
+      }
+      .commit-card .badge {
+        display: inline-block;
+        background: #059669;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .signature-area {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-top: 16px;
+      }
+      .sig-field { text-align: center; }
+      .sig-field input {
+        width: 100%;
+        border: none;
+        border-bottom: 1.5px solid #059669;
+        background: transparent;
+        font-family: inherit;
+        font-size: 14px;
+        text-align: center;
+        outline: none;
+        padding: 6px 0;
+      }
+      .sig-field input:focus { background: rgba(255,255,255,0.5); }
+      .sig-label {
+        font-size: 10px;
+        font-weight: 600;
+        color: #6c757d;
+        letter-spacing: 0.5px;
+        margin-top: 4px;
+      }
+
+      .actions {
+        margin-top: 28px;
+        padding-top: 16px;
+        border-top: 1px solid #d1fae5;
+        text-align: center;
+      }
+      .actions button {
+        margin: 0 4px;
+        padding: 8px 18px;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        transition: transform 0.15s ease;
+      }
+      .actions button:hover { transform: translateY(-1px); }
+      .btn-save { background: #059669; }
+      .btn-pdf { background: #10b981; }
+      .btn-clear { background: #94a3b8; }
+
+      .footer {
+        margin-top: 18px;
+        font-size: 11px;
+        color: #6c757d;
+        text-align: center;
+      }
+
+      .save-status {
+        display: inline-block;
+        margin-right: 10px;
+        font-size: 11px;
+        color: #16a34a;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .save-status.show { opacity: 1; }
+
+      @media print {
+        body { background: white; padding: 0; }
+        .sheet { box-shadow: none; padding: 0; }
+        .actions { display: none; }
+      }
+
+      @media (max-width: 600px) {
+        .tools-grid { grid-template-columns: 1fr; }
+        .student-info { grid-template-columns: 1fr; }
+        .signature-area { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sheet">
+      <div class="header">
+        <h1>الأدوات الرقمية والإنتاجية</h1>
+        <div class="session-tag">الجلسة 09</div>
+      </div>
+
+      <div class="student-info">
+        <div class="field">
+          <span>الاسم:</span>
+          <input type="text" id="studentName" placeholder="اكتب اسمك" />
+        </div>
+        <div class="field">
+          <span>التخصص:</span>
+          <input type="text" id="studentTrack" placeholder="مثال: تطوير برمجيات" />
+        </div>
+      </div>
+
+      <div class="instructions">
+        <strong>التعليمات:</strong>
+        الجزء (أ) يُرشدك إلى بناء مساحة عمل عبر Notion، والجزء (ب) لاختيار أدوات
+        الذكاء الاصطناعي المناسبة لتخصصك، والجزء (ج) لمتابعة تعلّمك. تُحفَظ جميع
+        البيانات تلقائياً، ويمكنك العودة في أي وقت لإكمال العمل.
+      </div>
+
+      <!-- Part A: Notion -->
+      <div class="section">
+        <div class="section-title">
+          <span class="section-num">أ</span> ابنِ مساحة Notion الشخصية
+        </div>
+        <p style="font-size: 12px; color: #6c757d; margin-bottom: 10px">
+          اتّبع الخطوات وأنشئ نظامك الإنتاجي؛ كل خطوة تستغرق دقائق معدودة.
+        </p>
+
+        <div class="notion-step">
+          <span class="notion-num">1</span>
+          <div class="ns-content">
+            <div class="ns-title">سجّل حساباً على notion.so</div>
+            <div class="ns-desc">استخدم بريدك الإلكتروني المهني، واختر "Personal" أو ابدأ من صفحة فارغة.</div>
+          </div>
+        </div>
+        <div class="notion-step">
+          <span class="notion-num">2</span>
+          <div class="ns-content">
+            <div class="ns-title">الصفحة الأولى: أهداف الأسبوع</div>
+            <div class="ns-desc">ثلاثة أهداف مع مربعات اختيار: البحث عن وظيفة، تطوير مهارة، هدف شخصي.</div>
+          </div>
+        </div>
+        <div class="notion-step">
+          <span class="notion-num">3</span>
+          <div class="ns-content">
+            <div class="ns-title">الصفحة الثانية: لوحة المهام (Kanban)</div>
+            <div class="ns-desc">ثلاثة أعمدة: للعمل | قيد التنفيذ | منجزة. أضف خمس مهام حقيقية.</div>
+          </div>
+        </div>
+        <div class="notion-step">
+          <span class="notion-num">4</span>
+          <div class="ns-content">
+            <div class="ns-title">الصفحة الثالثة: متابعة التعلم</div>
+            <div class="ns-desc">جدول: المصدر | الموضوع | الحالة | ملاحظات. أضف ثلاثة موارد.</div>
+          </div>
+        </div>
+
+        <div class="write-area">
+          <div class="write-label">أهدافي الثلاثة لهذا الأسبوع:</div>
+          <input type="text" class="editable-input" data-field="goal-1" placeholder="الهدف الأول" />
+          <input type="text" class="editable-input" data-field="goal-2" placeholder="الهدف الثاني" />
+          <input type="text" class="editable-input" data-field="goal-3" placeholder="الهدف الثالث" />
+        </div>
+
+        <div class="write-area">
+          <div class="write-label">خمس مهام للوحة المهام:</div>
+          <input type="text" class="editable-input" data-field="task-1" placeholder="المهمة الأولى" />
+          <input type="text" class="editable-input" data-field="task-2" placeholder="المهمة الثانية" />
+          <input type="text" class="editable-input" data-field="task-3" placeholder="المهمة الثالثة" />
+          <input type="text" class="editable-input" data-field="task-4" placeholder="المهمة الرابعة" />
+          <input type="text" class="editable-input" data-field="task-5" placeholder="المهمة الخامسة" />
+        </div>
+      </div>
+
+      <!-- Part B: AI Tools -->
+      <div class="section">
+        <div class="section-title b">
+          <span class="section-num b">ب</span> أدوات الذكاء الاصطناعي لتخصصي
+        </div>
+        <p style="font-size: 12px; color: #6c757d; margin-bottom: 8px">
+          اختر الأدوات التي ترغب في تجربتها، ثم حدّد إحداها لتبدأ بها هذا الأسبوع.
+        </p>
+
+        <div class="tools-grid">
+          <label class="tool-item">
+            <input type="checkbox" data-field="ai-chatgpt" />
+            <span>ChatGPT: للكتابة والبحث</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="ai-copilot" />
+            <span>GitHub Copilot: للمطورين</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="ai-firefly" />
+            <span>Adobe Firefly: تصميم توليدي</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="ai-midjourney" />
+            <span>Midjourney: صور وفنون مفهومية</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="ai-canva" />
+            <span>Canva AI: تصاميم سريعة</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="ai-jasper" />
+            <span>Jasper AI: محتوى تسويقي</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="ai-removebg" />
+            <span>Remove.bg: إزالة الخلفيات</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="ai-runway" />
+            <span>Runway ML: تحرير فيديو وصور</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="ai-tabnine" />
+            <span>Tabnine: مساعد برمجة</span>
+          </label>
+          <label class="tool-item">
+            <input type="checkbox" data-field="ai-replit" />
+            <span>Replit AI: برمجة بالمتصفح</span>
+          </label>
+          <label class="tool-item tool-other">
+            <input type="checkbox" data-field="ai-other-check" />
+            <span>أداة أخرى:</span>
+            <input type="text" data-field="ai-other-text" placeholder="اكتب اسم الأداة..." />
+          </label>
+        </div>
+
+        <div class="write-area">
+          <div class="write-label">الأداة التي سأبدأ بها وفيمَ سأستخدمها:</div>
+          <textarea class="editable-input" data-field="ai-first-pick"></textarea>
+        </div>
+      </div>
+
+      <!-- Part C: Learning Tracker -->
+      <div class="section">
+        <div class="section-title c">
+          <span class="section-num c">ج</span> متابعة التعلم
+        </div>
+        <p style="font-size: 12px; color: #6c757d; margin-bottom: 8px">
+          اكتب ثلاثة موارد (دورات، كتب، قنوات) ستتابعها هذا الشهر.
+        </p>
+        <table class="learn-table">
+          <tr>
+            <th style="width: 30%;">الكورس / المصدر</th>
+            <th style="width: 25%;">الموضوع</th>
+            <th style="width: 20%;">الحالة</th>
+            <th style="width: 25%;">ملاحظات</th>
+          </tr>
+          <tr>
+            <td><input type="text" data-field="learn-1-source" placeholder="مثال: Coursera" /></td>
+            <td><input type="text" data-field="learn-1-topic" placeholder="مثال: Python" /></td>
+            <td><input type="text" data-field="learn-1-status" placeholder="بدأتُ / 50٪..." /></td>
+            <td><input type="text" data-field="learn-1-notes" placeholder="ملاحظات موجزة" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" data-field="learn-2-source" /></td>
+            <td><input type="text" data-field="learn-2-topic" /></td>
+            <td><input type="text" data-field="learn-2-status" /></td>
+            <td><input type="text" data-field="learn-2-notes" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" data-field="learn-3-source" /></td>
+            <td><input type="text" data-field="learn-3-topic" /></td>
+            <td><input type="text" data-field="learn-3-status" /></td>
+            <td><input type="text" data-field="learn-3-notes" /></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="actions">
+        <button class="btn-save" onclick="saveData()">💾 حفظ العمل</button>
+        <button class="btn-pdf" onclick="downloadPDF()">📥 تحميل PDF</button>
+        <button class="btn-clear" onclick="clearData()">🗑️ مسح الكل</button>
+        <span id="saveStatus" class="save-status">✓ تم الحفظ تلقائياً</span>
+      </div>
+
+      <div class="footer">
+        منهج مهارات التوظيف &middot; برنامج الخريجين الجدد &middot; الجلسة 09: الأدوات الرقمية والإنتاجية
+      </div>
+    </div>
+
+    <script>
+      const STORAGE_KEY = "productivity_data";
+
+      window.addEventListener("DOMContentLoaded", function () {
+        loadData();
+        attachListeners();
+      });
+
+      function attachListeners() {
+        document.querySelectorAll("input, textarea").forEach((el) => {
+          el.addEventListener("input", autoSave);
+          el.addEventListener("change", autoSave);
+        });
+
+        document.querySelectorAll(".tool-item input[type='checkbox']").forEach((cb) => {
+          cb.addEventListener("change", function () {
+            this.closest(".tool-item").classList.toggle("checked", this.checked);
+          });
+        });
+      }
+
+      function autoSave() {
+        const data = {};
+        data.studentName = document.getElementById("studentName").value;
+        data.studentTrack = document.getElementById("studentTrack").value;
+
+        document.querySelectorAll("[data-field]").forEach((el) => {
+          const field = el.getAttribute("data-field");
+          if (el.type === "checkbox") {
+            data[field] = el.checked;
+          } else {
+            data[field] = el.value;
+          }
+        });
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        showSaveStatus();
+      }
+
+      function showSaveStatus() {
+        const status = document.getElementById("saveStatus");
+        status.classList.add("show");
+        clearTimeout(window._saveTimer);
+        window._saveTimer = setTimeout(() => status.classList.remove("show"), 1500);
+      }
+
+      function saveData() {
+        autoSave();
+        alert("✅ تم حفظ عملك بنجاح!");
+      }
+
+      function loadData() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const data = JSON.parse(saved);
+
+        if (data.studentName) document.getElementById("studentName").value = data.studentName;
+        if (data.studentTrack) document.getElementById("studentTrack").value = data.studentTrack;
+
+        document.querySelectorAll("[data-field]").forEach((el) => {
+          const field = el.getAttribute("data-field");
+          if (data[field] === undefined) return;
+          if (el.type === "checkbox") {
+            el.checked = !!data[field];
+            el.closest(".tool-item")?.classList.toggle("checked", el.checked);
+          } else {
+            el.value = data[field];
+          }
+        });
+      }
+
+      function clearData() {
+        if (!confirm("هل أنت متأكد من رغبتك في مسح جميع البيانات؟")) return;
+        localStorage.removeItem(STORAGE_KEY);
+        document.querySelectorAll("input, textarea").forEach((el) => {
+          if (el.type === "checkbox") {
+            el.checked = false;
+            el.closest(".tool-item")?.classList.remove("checked");
+          } else {
+            el.value = "";
+          }
+        });
+      }
+
+      function downloadPDF() {
+        window.print();
+      }
+    </script>
+  </body>
+</html>
